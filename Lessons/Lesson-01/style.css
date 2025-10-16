@@ -1,0 +1,33 @@
+img {
+    width: 400px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 10px;
+}
+
+li {
+    margin: 10px;
+    padding: 10px;
+}
+
+#first-list li{
+    background-color: lightgray;
+}
+
+#second-list li{
+    background-color: pink;
+}
+
+.on-sale {
+    border: 2px solid yellow;
+}
+
+#best-one {
+    border: 2px solid blue;
+}
+
+a:hover li {
+    border: 2px solid red;
+}
