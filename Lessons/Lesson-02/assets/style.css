@@ -88,4 +88,11 @@ a:hover {
 
 #special {
     background-color: rgb(192, 125, 137);
+
+    text-align: center;
+}
+
+img {
+    max-width: 100px;
+    height: auto;
 }
