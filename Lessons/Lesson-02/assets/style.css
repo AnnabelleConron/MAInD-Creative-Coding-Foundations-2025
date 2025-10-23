@@ -79,12 +79,13 @@ a:hover {
     margin: 1rem 1rem;
 }
 
-#myFlexbox div {
+.box {
     background-color: rgb(173, 138, 59);
     
     padding: 1rem;
+    margin: 0.5rem;
 }
 
-.special {
+#special {
     background-color: rgb(192, 125, 137);
 }
