@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>To Do</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body data-view="list">
+  <header class="page-header">
+    <h1>To Do</h1>
+
+    <form id="addForm" autocomplete="off" aria-label="Add a to do">
+      <label class="visually-hidden" for="todoInput">Type your to do</label>
+      <input id="todoInput" name="todo" type="text" placeholder="type your to do" />
+      <button id="addBtn" type="submit">enter</button>
+    </form>
+
+    <nav class="view-toggle" aria-label="Toggle view">
+      <button type="button" data-view="list" aria-pressed="true">List view</button>
+      <button type="button" data-view="card" aria-pressed="false">Card view</button>
+    </nav>
+  </header>
+
+  <main id="board" aria-live="polite">
+    <!-- Items render here -->
+  </main>
+
+  <template id="todoTemplate">
+    <article class="todo-item">
+      <label class="todo-check">
+        <input type="checkbox" aria-label="Mark as done and remove" />
+        <span class="checkmark" aria-hidden="true"></span>
+      </label>
+      <p class="todo-text"></p>
+    </article>
+  </template>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
