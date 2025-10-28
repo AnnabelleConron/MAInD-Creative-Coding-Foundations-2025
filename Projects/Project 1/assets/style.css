@@ -1,0 +1,42 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: pink;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    background-color: peru;
+    border-bottom: 1px solid #ccc;
+}
+
+#board {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.card-view {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5px;
+    background-color: white;
+}
+
+.card-view .todo {
+    flex-direction: column;
+    width: 150px;
+    height: 100px;
+    justify-content: center;
+    text-align: center;
+}
