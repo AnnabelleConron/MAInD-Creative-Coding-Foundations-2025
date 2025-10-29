@@ -19,6 +19,10 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-family: Arial, sans-serif;
 }
@@ -49,6 +53,18 @@ body {
     height: 100vh;
 }
 
+/* main style */
+
+main {
+    padding: 1rem;
+    background-color: #FDFFF1;
+    flex-grow: 1;
+    /* to make the main section take up all available space */
+    margin: 0, 1rem;
+}
+
+/* header styles */
+
 header {
     padding: 1rem;
 }
@@ -74,17 +90,13 @@ input, button {
     /* to make the input field take up all available space */
 }
 
-main {
-    padding: 1rem;
-    background-color: #FDFFF1;
-    flex-grow: 1;
-    /* to make the main section take up all available space */
-    margin: 0, 1rem;
-}
+/* list item styles */
 
 li {
     list-style-type: none;
 }
+
+/* list view */
 
 ul.list li {
     padding: 1rem 0;
@@ -106,6 +118,19 @@ ul.list li p {
     /* to make the paragraph take up all available space */
 }
 
+/* card view */
+
+ul.card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* to distribute the cards evenly */
+}
+
 ul.card li {
+    padding: 1rem;
     background-color: #87CDFE;
+    width: calc(100% / 3 - 0.5rem);
+    /* to make the cards take up 1/3 of the available space minus the gap */
+    overflow: hidden;
 }
