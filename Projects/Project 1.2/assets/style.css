@@ -23,11 +23,30 @@ html {
     font-family: Arial, sans-serif;
 }
 
+h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: regular;
+    padding: 0.5rem;
+}
+
+p {
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
 body {
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     /* the body is a flex element */
+    height: 100vh;
 }
 
 header {
@@ -58,5 +77,35 @@ input, button {
 main {
     padding: 1rem;
     background-color: #FDFFF1;
+    flex-grow: 1;
+    /* to make the main section take up all available space */
+    margin: 0, 1rem;
+}
 
+li {
+    list-style-type: none;
+}
+
+ul.list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #F799BE;
+    display: flex;
+    gap: 1rem;
+    /* to add space between the elements inside each list item */
+    align-items: center;
+    /* to vertically align the elements inside each list item */
+}
+
+ul.list li:first-child {
+    padding-top: 0;
+    /* this will just be applied to the forst list item */
+}
+
+ul.list li p {
+    flex-grow: 1;
+    /* to make the paragraph take up all available space */
+}
+
+ul.card li {
+    background-color: #87CDFE;
 }
