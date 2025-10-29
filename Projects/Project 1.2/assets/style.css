@@ -1,0 +1,62 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+html {
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    /* the body is a flex element */
+}
+
+header {
+    padding: 1rem;
+}
+
+input, button {
+    border: 0.5px solid #E5E6DD;
+    border-radius: 1rem;
+    padding: 0rem 0.5rem;
+    height: 2rem;
+}
+
+#form-input {
+    width: 100%;
+    display: flex;
+    /* to adjust how the elements inside the input form will show */
+    gap: 0.2rem;
+    /* to add space between the elements inside the input form */;
+    margin-bottom: 1rem;
+}
+
+#input-todo {
+    flex-grow: 1;
+    /* to make the input field take up all available space */
+}
+
+main {
+    padding: 1rem;
+    background-color: #FDFFF1;
+
+}

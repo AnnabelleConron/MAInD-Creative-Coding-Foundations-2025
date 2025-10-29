@@ -11,17 +11,24 @@
 
 <body> 
     <header>
-        <input type="text" id="todoInput" placeholder="Enter a new to do">
+        <form id="form-input">
+            <input type="text" id="input-todo" placeholder="Enter a new to do">
+            <input type="color" id="input-color" value="#fff000">
+            <!-- allow user to customise the colour -->
+            <button id="button-add">Add</button>
+            <!-- add the text and colour selection in the list in the main -->
+        </form>
         <nav>
-            <button></button>
-            <button></button>
+            <button id="button-list">List View</button>
+            <button id="button-card">Card View</button>
         </nav>
     </header>
 
     <main>
         <ul>
             <li>
-            
+                <p>Sample Text</p>
+                <button class="button-delete">Delete</button>
             </li>
         </ul>
     </main>
