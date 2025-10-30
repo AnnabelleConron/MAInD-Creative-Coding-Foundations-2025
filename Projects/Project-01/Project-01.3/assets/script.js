@@ -1,4 +1,4 @@
-// Get references to the input field and add button
+// get references to the input field and add button
 const addButton = document.getElementById('add-button');
 
 const listViewButton = document.getElementById('list-view-button');
@@ -6,8 +6,28 @@ const cardViewButton = document.getElementById('card-view-button');
 
 const taskInput = document.getElementById('todo-input');
 
-// Event listener to the add button using the addButton and taskInput reference
-// Listener for the add button
+const taskList = document.getElementById('todo-list');
+
+// event listener to the view buttons using the listViewButton and cardViewButton references
+// LIST VIEW
+listViewButton.addEventListener('click', () => {
+    console.log('List View button clicked');
+
+    taskList.classList.remove('card-view');
+    taskList.classList.add('list-view');
+})
+
+// CARD VIEW
+cardViewButton.addEventListener('click', () => {
+    console.log('Card View button clicked');
+    
+    taskList.classList.remove('list-view');
+    taskList.classList.add('card-view');
+})
+
+// ADD
+// event listener to the add button using the addButton and taskInput reference
+// listener for the add button
 addButton.addEventListener('click', () => {
     // detecting a click on the add button
     console.log('Add button clicked');
@@ -24,7 +44,7 @@ addButton.addEventListener('click', () => {
     listElement.classList.add('todo-item');
     // add the class "todo-item" to the new list element
 
-    document.getElementById('todo-list').appendChild(listElement);
+    taskList.appendChild(listElement);
     // append the new list element to the existing todo-list ul element
 
     taskInput.value = '';
