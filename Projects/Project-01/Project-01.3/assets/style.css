@@ -141,7 +141,25 @@ button:hover {
 }
 
 /* view buttons */
+
 .view-button:hover {
-    background-color: #5FB772;
-    border-color: #00801C;
+    background-color: #78B9E7;
+    border-color: #014CC1;
+}
+
+.view-button:active {
+    background-color: #78B9E7;
+    border-color: #014CC1;
+}
+
+/* add button */
+
+#add-button:hover{
+    background-color: #F26B8D;
+    border-color: #C70039;
+}
+
+#add-button:active {
+    background-color: #F26B8D;
+    border-color: #C70039;
 }
