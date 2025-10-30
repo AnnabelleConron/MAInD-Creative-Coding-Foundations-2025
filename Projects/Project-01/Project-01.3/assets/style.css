@@ -27,7 +27,7 @@ time, mark, audio, video {
 
 html {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-color: #E5E6DD;
 }
 
 h1 {
@@ -130,4 +130,18 @@ li {
 
 .list-view li {
     display: list-item;
+}
+
+/* buttons */
+
+/* general button rules */
+
+button:hover {
+    cursor: pointer;
+}
+
+/* view buttons */
+.view-button:hover {
+    background-color: #5FB772;
+    border-color: #00801C;
 }
