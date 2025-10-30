@@ -1,25 +1,41 @@
 <!DOCTYPE html> 
+<!-- defines the document as an HTML5 document -->
 <html lang="en">
+<!-- root element -->
 <head>
+<!-- this section contains meta-information about the document -->
     <meta charset="UTF-8">
+    <!-- character encoding for the document -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 03</title>
+    <meta name="Author" content="Annabelle Conron">
+    <title>To Do List</title>
+    <!-- the title of the web page, displayed in the browser's title bar -->
     <link rel="stylesheet" href="assets/style.css">
     <!-- link the style sheet to the index file -->
     <script src="assets/script.js" defer></script>
-    $<!-- link the javascript file to the index file -->
+    <!-- link the javascript file to the index file, the attribute "defer" is added to ensure that the script is run after the html is fully loaded -->
 </head>
-<body>
 
+<body>
+    <!-- body contains all visible content of the web page -->
     <h1>
         To Do List
     </h1>
     
     <header>
-        <!-- input button -->
+        <!-- the header contains the input feild with the add button and the list view and card view button-->
         <div id="add-container">
-            <input type="text" id="task-input" placeholder="What I need to do...">
-            <button id="add-button">Add</button>
+        <!-- div is being used here to "group" the input and add button -->
+            <input type="text" id="todo-input" placeholder="What I need to do...">
+            <!-- this allows users to add text input -->
+            <button id="add-button">+</button>
+            <!-- with java this button allows users to add the text input to the to do list -->
+        </div>
+
+        <div id="view-button-container">
+        <!-- siv is being used to "group" Card View and List View buttons -->
+            <button id="list-view-button">List View</button>
+            <button id="card-view-button">Card View</button>
         </div>
     </header>
 
