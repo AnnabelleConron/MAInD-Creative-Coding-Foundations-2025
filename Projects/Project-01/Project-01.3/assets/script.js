@@ -15,6 +15,8 @@ addButton.addEventListener('click', () => {
 
     const listElement = document.createElement('li');
     // create new list element
-    // get inputValue and use it as the text content for the new list element
     listElement.innerHTML = inputValue;
+    // get inputValue and use it as the text content for the new list element
+    document.getElementById('todo-list').appendChild(listElement);
+    // append the new list element to the existing todo-list ul element
 })
