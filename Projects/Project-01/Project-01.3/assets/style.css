@@ -94,15 +94,28 @@ main {
 }
 
 ul {
-    background-color: #FADC1A;
+    background-color: #FFFFFF;
     border-radius: 12px;
 }
 
 li {
-    display: block;
+    display: flex;
     width: 100%;
     padding: 1rem;
+    background-color: #FFF4AE;
+    border-radius: 12px;
+    margin-bottom: 1rem;
 }
+
+li:last-child {
+    margin-bottom: 0;
+}
+
+/* checkbox */
+
+input[type="checkbox"] {
+    justify-self: start;
+} 
 
 /* card view */
 
@@ -113,10 +126,6 @@ li {
 }
 
 .card-view li {
-    background-color: #FFF4AE;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -124,12 +133,12 @@ li {
 /* list view */
 
 .list-view {
-    padding: 1rem 1rem 1rem 2.2rem;
+    padding: 1rem;
     margin-bottom: 1rem;
 }
 
 .list-view li {
-    display: list-item;
+    justify-content: flex-start;
 }
 
 /* buttons */
@@ -143,23 +152,21 @@ button:hover {
 /* view buttons */
 
 .view-button:hover {
-    background-color: #78B9E7;
-    border-color: #014CC1;
+    background-color: #448CDF;
 }
 
 .view-button:active {
-    background-color: #78B9E7;
-    border-color: #014CC1;
+    background-color: #448CDF;
+    border-color: #448CDF;
 }
 
 /* add button */
 
 #add-button:hover{
     background-color: #F26B8D;
-    border-color: #C70039;
 }
 
 #add-button:active {
     background-color: #F26B8D;
-    border-color: #C70039;
+    border-color: #F26B8D;
 }
