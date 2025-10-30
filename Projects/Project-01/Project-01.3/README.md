@@ -10,3 +10,9 @@ Starting from the concept of a pinboard, implement a web page that:
 - Allows the switch between two views (at least) (I have attached an image)
 
 *two screen shot of final webpage showing the different views (also add to an image file in project folder)*
+
+![first screenshot] (screenshots/image_01_01.png)
+
+## Project Description
+
+...
