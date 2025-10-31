@@ -6,7 +6,9 @@ const cardViewButton = document.getElementById('card-view-button');
 
 const taskInput = document.getElementById('todo-input');
 
-const taskList = document.getElementById('todo-list');
+const taskList = document.getElementById('todo-list');$
+
+// add counter for deleteMe - increment the 
 
 // event listener to the view buttons using the listViewButton and cardViewButton references
 // LIST VIEW
@@ -20,7 +22,7 @@ listViewButton.addEventListener('click', () => {
 // CARD VIEW
 cardViewButton.addEventListener('click', () => {
     console.log('Card View button clicked');
-    
+
     taskList.classList.remove('list-view');
     taskList.classList.add('card-view');
 })
@@ -38,7 +40,11 @@ addButton.addEventListener('click', () => {
 
     const listElement = document.createElement('li');
     // create new list element
-    listElement.innerHTML = inputValue;
+    // listElement.innerHTML = inputValue;
+    listElement.innerHTML = `
+    <input type="checkbox" id="checkbox-input" onclick="deleteMe()">
+    <p>${inputValue}</p>
+    `;
     // get inputValue and use it as the text content for the new list element
 
     listElement.classList.add('todo-item');

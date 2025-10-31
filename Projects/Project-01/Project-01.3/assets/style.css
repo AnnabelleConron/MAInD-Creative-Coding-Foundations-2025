@@ -115,6 +115,7 @@ li:last-child {
 
 input[type="checkbox"] {
     justify-self: start;
+    padding: 0rem;
 } 
 
 /* card view */
