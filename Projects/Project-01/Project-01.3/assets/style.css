@@ -98,7 +98,6 @@ input, button {
 
 main {
     padding: 1rem;
-    /* display: flex; */
 }
 
 ul {
@@ -106,8 +105,10 @@ ul {
     background-color: #FFFFFF;
     border-radius: 12px;
     gap: 1rem;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     height: fit-content;
+    flex-grow: 1;
+    width: 100%;
 }
 
 li {
@@ -133,7 +134,7 @@ ul.card-view {
   /* 1px gap between cards horizontally & vertically */
   padding: 1rem;
   /* optional: a 1px inset so outer edges match the gap */
-  height:fit-content;
+  align-items: flex-start;
 }
 
 .card-view li {
@@ -146,8 +147,8 @@ ul.card-view {
   /* Remove list-view spacing so the gap controls spacing instead */
   /* Keep your existing padding/border-radius/background from the base li rule */
   margin: 0px;
-  max-height: 25vh;
-  min-height: fit-content;
+  /* max-height: 25vh; */
+  /* min-height: fit-content; */
 }
 
 /* list view */
