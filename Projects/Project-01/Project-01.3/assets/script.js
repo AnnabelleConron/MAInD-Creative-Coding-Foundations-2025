@@ -1,20 +1,19 @@
-// get references to the input field and add button
+// CONSTANTS
+// References to the input field and add button
 const addButton = document.getElementById('add-button');
-
 const listViewButton = document.getElementById('list-view-button');
 const cardViewButton = document.getElementById('card-view-button');
-
 const taskInput = document.getElementById('todo-input');
+const taskList = document.getElementById('todo-list');
+const colorPicker = document.getElementById('color-picker');
 
-const taskList = document.getElementById('todo-list');$
 
-// add counter for deleteMe - increment the 
+// VIEW
+// Event listener to the view buttons using the listViewButton and cardViewButton references
 
-// event listener to the view buttons using the listViewButton and cardViewButton references
 // LIST VIEW
 listViewButton.addEventListener('click', () => {
     console.log('List View button clicked');
-
     taskList.classList.remove('card-view');
     taskList.classList.add('list-view');
 })
@@ -22,37 +21,37 @@ listViewButton.addEventListener('click', () => {
 // CARD VIEW
 cardViewButton.addEventListener('click', () => {
     console.log('Card View button clicked');
-
     taskList.classList.remove('list-view');
     taskList.classList.add('card-view');
 })
 
-// ADD
-// event listener to the add button using the addButton and taskInput reference
-// listener for the add button
+// ADD BUTTON
+// Event listener to the add button using the addButton and taskInput reference
+// ADD BUTTON
 addButton.addEventListener('click', () => {
-    // detecting a click on the add button
-    console.log('Add button clicked');
-
-    const inputValue = taskInput.value;
-    // can reuse in to check with the console that the input value is being detected when the add button is clicked
-    console.log(inputValue);
+    const inputValue = taskInput.value.trim();
+    if (inputValue === '') return;
 
     const listElement = document.createElement('li');
-    // create new list element
-    // listElement.innerHTML = inputValue;
-    listElement.innerHTML = `
-    <input type="checkbox" id="checkbox-input" onclick="deleteMe()">
-    <p>${inputValue}</p>
-    `;
-    // get inputValue and use it as the text content for the new list element
-
     listElement.classList.add('todo-item');
-    // add the class "todo-item" to the new list element
 
+    // apply selected colour
+    listElement.style.backgroundColor = colorPicker.value;
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+
+    const p = document.createElement('p');
+    p.textContent = inputValue;
+
+    listElement.appendChild(checkbox);
+    listElement.appendChild(p);
     taskList.appendChild(listElement);
-    // append the new list element to the existing todo-list ul element
 
     taskInput.value = '';
-    // clear the input field after adding the item
-})
+
+    // remove on check
+    checkbox.addEventListener('click', () => {
+        listElement.remove();
+    });
+});
