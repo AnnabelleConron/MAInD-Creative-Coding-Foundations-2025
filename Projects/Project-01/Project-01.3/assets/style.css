@@ -27,7 +27,7 @@ time, mark, audio, video {
 
 html {
     font-family: Arial, sans-serif;
-    background-color: #E5E6DD;
+    background-color: #F4F4F4;
 }
 
 h1 {
@@ -49,7 +49,7 @@ input, button {
     font-size: 1rem;
     padding: 0.5rem;
     border: 1px solid;
-    border-radius: 12px;
+    border-radius: 6px;
     background-color: #ffffff;
 }
 
@@ -61,15 +61,22 @@ input, button {
     padding: 1rem;
 }
 
+#todo-input, #color-picker, #add-button {
+  border-color: grey;
+}
+
 #todo-input {
     flex: 1;
-    border-color: #ffffff;
 }
 
 #add-button {
     padding:0.5rem 1rem;
-    border-color: #F799BE;
-    background-color: #F799BE;
+}
+
+#color-picker {
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
 }
 
 /* view button container */
@@ -91,13 +98,16 @@ input, button {
 
 main {
     padding: 1rem;
+    /* display: flex; */
 }
 
 ul {
-    min-height: 50dvh;
+    /* min-height: 50dvh; */
     background-color: #FFFFFF;
     border-radius: 12px;
     gap: 1rem;
+    min-height: 100vh;
+    height: fit-content;
 }
 
 li {
@@ -115,14 +125,29 @@ li:last-child {
 /* card view */
 
 ul.card-view {
-    padding: 1rem;
-    flex-wrap: wrap;
+  display: flex; 
+  /* make the UL a flex container */
+  flex-wrap: wrap;
+  /* allow wrapping to next row */
+  gap: 1rem;
+  /* 1px gap between cards horizontally & vertically */
+  padding: 1rem;
+  /* optional: a 1px inset so outer edges match the gap */
+  height:fit-content;
 }
 
 .card-view li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  /* keep your inner flex alignment */
+  justify-content: center;
+  align-items: center;
+  /* Even split: two per row accounting for the single 1px gap */
+  flex: 0 1 calc((100% - 1rem) / 2);
+  /* Remove list-view spacing so the gap controls spacing instead */
+  /* Keep your existing padding/border-radius/background from the base li rule */
+  margin: 0px;
+  max-height: 25vh;
+  min-height: fit-content;
 }
 
 /* list view */
@@ -159,7 +184,7 @@ button:hover {
 /* add button */
 
 #add-button:hover{
-    background-color: #F26B8D;
+    background-color: lightgrey;
 }
 
 #add-button:active {
@@ -167,11 +192,10 @@ button:hover {
     border-color: #F26B8D;
 }
 
-#color-picker {
-    width: 45px;
-    height: 45px;
-    padding: 0rem;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
+
+
+@media (max-width: 600px) {
+  .card-view li {
+    flex-basis: 100%;
+  }
 }
