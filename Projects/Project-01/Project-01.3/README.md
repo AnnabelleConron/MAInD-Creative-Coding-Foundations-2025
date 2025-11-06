@@ -14,8 +14,8 @@ Starting from the concept of a pinboard, implement a web page that:
 A simple, responsive to-do list web page that lets users add different coloured tasks to a to do list. Users can switch between list and card views, and remove completed items. Tasks persist using localStorage, with intuitive button and keyboard (Enter key) interactions.
 
 ## Screenshots
-![List View](DOCS/assignment_01_3.png "List View")
-![Card View](DOCS/assignment_01_4.png "List View")
+![List View](DOCS/assignment_01_card_02.png "List View")
+![Card View](DOCS/assignment_01_list_02.png "List View")
 
 ## List of Functions
 1. createTaskElement(text, color)
