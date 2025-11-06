@@ -17,7 +17,7 @@ colorButtons.forEach(button => {
   });
 });
 
-// === VIEW TOGGLE ===
+// === VIEW BUTTON ===
 // Event listener to the view buttons using the listViewButton and cardViewButton references
 
 listViewButton.addEventListener('click', () => {
@@ -31,6 +31,7 @@ cardViewButton.addEventListener('click', () => {
 });
 
 // === LOCAL STORAGE ===
+// When a task is added or removed, it updates localStorage
 function saveTasks() {
   const tasks = [];
   document.querySelectorAll('#todo-list li').forEach(li => {
@@ -41,6 +42,7 @@ function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+// On page reload, loadTasks() rebuilds the list from saved data
 function loadTasks() {
   const saved = JSON.parse(localStorage.getItem('tasks')) || [];
   saved.forEach(task => {
@@ -93,4 +95,3 @@ taskInput.addEventListener('keydown', (e) => {
 
 // === INITIAL LOAD ===
 loadTasks();
-

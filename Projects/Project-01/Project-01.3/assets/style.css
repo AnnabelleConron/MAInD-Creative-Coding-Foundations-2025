@@ -81,6 +81,8 @@ input, button {
     padding:0.5rem 1rem;
 }
 
+/* Color Picker */
+
 #color-picker {
     display: flex;
     gap: 0.5rem;
@@ -88,8 +90,6 @@ input, button {
 }
 
 .color-swatch {
-    /* width: 40px;
-    height: 40px; */
     border-radius: 6px;
     border: 1px solid grey;
     cursor: pointer;
@@ -100,7 +100,7 @@ input, button {
     height: 40px;
 }
 
-/* view button container */
+/* View Button */
 
 #view-button-container {
     display: flex;
@@ -114,7 +114,7 @@ input, button {
     text-transform: uppercase;
 }
 
-/* to do list */
+/* To Do List */
 
 ul {
     background-color: #FFFFFF;
@@ -126,6 +126,8 @@ ul {
     flex-grow: 1;
     width: 100%;
 }
+
+/* To Do List Item */
 
 li {
     padding: 1rem;
@@ -139,7 +141,7 @@ li:last-child {
 }
 
 
-/* card view */
+/* Card View To Do List */
 
 ul.card-view {
     display: flex; 
@@ -165,7 +167,7 @@ ul.card-view {
     margin: 0px;
 }
 
-/* list view */
+/* List View To Do List */
 
 .list-view {
     padding: 1rem;
@@ -177,15 +179,15 @@ ul.card-view {
     justify-content: flex-start;
 }
 
-/* buttons */
+/* Buttons */
 
-/* general button rules */
+/* General Button Rules */
 
 button:hover {
     cursor: pointer;
 }
 
-/* view buttons */
+/* View Button */
 
 .view-button:hover {
     background-color: lightgrey;
@@ -195,7 +197,7 @@ button:hover {
     background-color: darkgrey;
 }
 
-/* add button */
+/* Add Button */
 
 #add-button:hover{
     background-color: lightgrey;
@@ -205,7 +207,7 @@ button:hover {
     background-color: darkgrey;
 }
 
-
+/* Media Query */
 
 @media (max-width: 600px) {
   .card-view li {
