@@ -33,7 +33,13 @@
         <!-- div is being used here to "group" the input and add button -->
             <input type="text" id="todo-input" placeholder="I need to do...">
             <!-- this allows users to add text input -->
-            <input type="color" id="color-picker" value="#FFF4AE">
+            <!-- <input type="color" id="color-picker" value="#FFF4AE"> -->
+             <div id="color-picker">
+                <button class="color-swatch" data-color="#F7A262" style="background:#F7A262;" aria-label="Yellow"></button>
+                <button class="color-swatch" data-color="#87CDFE" style="background:#87CDFE;" aria-label="Blue"></button>
+                <button class="color-swatch" data-color="#F799BE" style="background:#F799BE;" aria-label="Pink"></button>
+                <button class="color-swatch" data-color="#5FB772" style="background:#5FB772;" aria-label="Green"></button>
+            </div>
             <!-- this allows users to select the colour of their to do item -->
             <button id="add-button">+</button>
             <!-- with java this button allows users to add the text input to the to do list -->

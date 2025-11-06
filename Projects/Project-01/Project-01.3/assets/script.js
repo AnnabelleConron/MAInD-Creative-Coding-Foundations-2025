@@ -5,7 +5,18 @@ const listViewButton = document.getElementById('list-view-button');
 const cardViewButton = document.getElementById('card-view-button');
 const taskInput = document.getElementById('todo-input');
 const taskList = document.getElementById('todo-list');
-const colorPicker = document.getElementById('color-picker');
+// const colorPicker = document.getElementById('color-picker');
+const colorButtons = document.querySelectorAll('#color-picker .color-swatch');
+let selectedColor = '#F7A262'; // default colour
+
+colorButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    selectedColor = button.dataset.color;
+    colorButtons.forEach(btn => btn.classList.remove('selected'));
+    button.classList.add('selected');
+  });
+});
+
 
 
 // VIEW
@@ -36,7 +47,8 @@ addButton.addEventListener('click', () => {
     listElement.classList.add('todo-item');
 
     // apply selected colour
-    listElement.style.backgroundColor = colorPicker.value;
+    // listElement.style.backgroundColor = colorPicker.value;
+    listElement.style.backgroundColor = selectedColor;
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';

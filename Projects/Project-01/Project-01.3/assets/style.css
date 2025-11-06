@@ -45,6 +45,14 @@ p {
     padding: 0.5rem;
 }
 
+header {
+    padding-top: 1rem;
+}
+
+main {
+    padding: 1rem;
+}
+
 input, button {
     font-size: 1rem;
     padding: 0.5rem;
@@ -62,7 +70,7 @@ input, button {
 }
 
 #todo-input, #color-picker, #add-button {
-  border-color: grey;
+    border-color: grey;
 }
 
 #todo-input {
@@ -74,9 +82,22 @@ input, button {
 }
 
 #color-picker {
-    width: 45px;
-    height: 45px;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.color-swatch {
+    /* width: 40px;
+    height: 40px; */
+    border-radius: 6px;
+    border: 1px solid grey;
     cursor: pointer;
+}
+
+.color-swatch.selected {
+    width: 40px;
+    height: 40px;
 }
 
 /* view button container */
@@ -95,10 +116,6 @@ input, button {
 
 /* to do list */
 
-main {
-    padding: 1rem;
-}
-
 ul {
     background-color: #FFFFFF;
     border-radius: 6px;
@@ -113,7 +130,7 @@ ul {
 li {
     padding: 1rem;
     margin-bottom: 1rem;
-    background-color: #FFF4AE;
+    background-color: #F7A262;
     border-radius: 6px;
 }
 
@@ -125,29 +142,27 @@ li:last-child {
 /* card view */
 
 ul.card-view {
-  display: flex; 
-  /* make the UL a flex container */
-  flex-wrap: wrap;
-  /* allow wrapping to next row */
-  gap: 1rem;
-  /* 1px gap between cards horizontally & vertically */
-  padding: 1rem;
-  /* optional: a 1px inset so outer edges match the gap */
-  align-items: flex-start;
+    display: flex; 
+    /* make the UL a flex container */
+    flex-wrap: wrap;
+    /* allow wrapping to next row */
+    gap: 1rem;
+    /* 1px gap between cards horizontally & vertically */
+    padding: 1rem;
+    /* optional: a 1px inset so outer edges match the gap */
+    align-items: flex-start;
 }
 
 .card-view li {
-  display: flex;
-  /* keep your inner flex alignment */
-  justify-content: center;
-  align-items: center;
-  /* Even split: two per row accounting for the single 1px gap */
-  flex: 0 1 calc((100% - 1rem) / 2);
-  /* Remove list-view spacing so the gap controls spacing instead */
-  /* Keep your existing padding/border-radius/background from the base li rule */
-  margin: 0px;
-  /* max-height: 25vh; */
-  /* min-height: fit-content; */
+    display: flex;
+    /* keep your inner flex alignment */
+    justify-content: center;
+    align-items: center;
+    /* Even split: two per row accounting for the single 1px gap */
+    flex: 0 1 calc((100% - 1rem) / 2);
+    /* Remove list-view spacing so the gap controls spacing instead */
+    /* Keep your existing padding/border-radius/background from the base li rule */
+    margin: 0px;
 }
 
 /* list view */
