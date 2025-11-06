@@ -14,6 +14,10 @@
     <!-- link the style sheet to the index file -->
     <script src="assets/script.js" defer></script>
     <!-- link the javascript file to the index file, the attribute "defer" is added to ensure that the script is run after the html is fully loaded -->
+    <!-- Typograpghy -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -27,7 +31,7 @@
 
         <div id="add-container">
         <!-- div is being used here to "group" the input and add button -->
-            <input type="text" id="todo-input" placeholder="What I need to do...">
+            <input type="text" id="todo-input" placeholder="I need to do...">
             <!-- this allows users to add text input -->
             <input type="color" id="color-picker" value="#FFF4AE">
             <!-- this allows users to select the colour of their to do item -->
@@ -46,10 +50,10 @@
         <!-- main contains the to do list items -->
         <ul id="todo-list" class="list-view">
         <!-- unordered list to hold the to do list items and the java script changes the view -->
-            <li class="todo-item">
+            <!-- <li class="todo-item">
                  <input type="checkbox" id="checkbox-input">
                  <p>Sample To Do Item 1</p>
-            </li>
+            </li> -->
         </ul>
     </main>
 

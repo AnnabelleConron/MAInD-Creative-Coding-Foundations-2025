@@ -26,7 +26,7 @@ time, mark, audio, video {
 }
 
 html {
-    font-family: Arial, sans-serif;
+    font-family: "Work Sans", sans-serif;
     background-color: #F4F4F4;
 }
 
@@ -89,9 +89,8 @@ input, button {
 
 .view-button {
     flex: 1;
-    border-radius: 12px;
-    border-color: #87CDFE;
-    background-color: #87CDFE;
+    border-color: grey;
+    text-transform: uppercase;
 }
 
 /* to do list */
@@ -101,11 +100,11 @@ main {
 }
 
 ul {
-    /* min-height: 50dvh; */
     background-color: #FFFFFF;
-    border-radius: 12px;
+    border-radius: 6px;
+    border: 1px solid;
+    border-color: grey;
     gap: 1rem;
-    /* min-height: 100vh; */
     height: fit-content;
     flex-grow: 1;
     width: 100%;
@@ -115,7 +114,7 @@ li {
     padding: 1rem;
     margin-bottom: 1rem;
     background-color: #FFF4AE;
-    border-radius: 12px;
+    border-radius: 6px;
 }
 
 li:last-child {
@@ -174,12 +173,11 @@ button:hover {
 /* view buttons */
 
 .view-button:hover {
-    background-color: #448CDF;
+    background-color: lightgrey;
 }
 
 .view-button:active {
-    background-color: #448CDF;
-    border-color: #448CDF;
+    background-color: darkgrey;
 }
 
 /* add button */
@@ -189,8 +187,7 @@ button:hover {
 }
 
 #add-button:active {
-    background-color: #F26B8D;
-    border-color: #F26B8D;
+    background-color: darkgrey;
 }
 
 
