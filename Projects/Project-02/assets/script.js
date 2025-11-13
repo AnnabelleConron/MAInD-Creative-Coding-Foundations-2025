@@ -20,3 +20,56 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+
+// Function to create card
+function createCard(ioc, color) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    const cardInner = document.createElement("div");
+    cardInner.classList.add("card-inner");
+
+    const cardFront = document.createElement("div");
+    cardFront = document.createElement.add("card-front");
+
+    const cardBack = document.createElement("div");
+    cardBack.classList.add("card-back");
+    cardBack.style.color = color;
+    cardBack.innerHTML = '<i class="fas' +icon+'"></i>';
+
+    cardInner.appendChild(cardFront);
+
+    cardInner.appendChild(cardBack);
+    cardInner.appendChild(cardInner);
+
+    card.addEventListener("click", () => flipCard(card));
+    card.dataset.icon = icon;
+
+    return cardBack;
+}
+
+function flipCard(card){
+    if(flippedCards.length === 2 || card.classList.contains("flipped") || card.classList.contains("matched")) return;
+
+    card.classList.add("flipped");
+    flippedCards.push(card);
+
+    if(flippedCards.length === 2)
+        checkForMatch();
+}
+
+function checkForMatch () {
+    const [card1, card2] = flippedCards;
+
+    if(card1.dataset.icon === card2.dataset.icon) {
+        card1.classList.add("matched");
+        
+        card2.classList.add("matched");
+        matchedCards.push(card1, card2);
+    }
+    else {
+        setTimeout( () => {
+            card1.classList.remove ("flipped")
+        })
+    }
+}
