@@ -76,3 +76,31 @@ h1 {
     border: 2px solid #ecf0f1;
 }
 
+.card-back {
+    background-color: #fff;
+    color: #000;
+    transform: rotateY(180deg);
+}
+
+#status {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00b894;
+}
+
+#reset-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    background-color: #00b894;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#reset-btn:hover {
+    background-color: #00a67c;
+}
