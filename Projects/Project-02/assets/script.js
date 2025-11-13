@@ -4,8 +4,8 @@ const icons = [
 ];
 
 const board = document.getElementById("game-board");
-const status = ocument.getElementById("status");
-const resetBtn = ocument.getElementById("reset-btn");
+const status = document.getElementById("status");
+const resetBtn = document.getElementById("reset-btn");
 
 let flippedCards = [];
 let matchedCards = [];
@@ -30,12 +30,12 @@ function createCard(ioc, color) {
     cardInner.classList.add("card-inner");
 
     const cardFront = document.createElement("div");
-    cardFront = document.createElement.add("card-front");
+    cardFront.classList.add("card-front");
 
     const cardBack = document.createElement("div");
     cardBack.classList.add("card-back");
     cardBack.style.color = color;
-    cardBack.innerHTML = '<i class="fas' +icon+'"></i>';
+    cardBack.innerHTML = '<i class="fas'+icon+'"></i>';
 
     cardInner.appendChild(cardFront);
 
@@ -45,7 +45,7 @@ function createCard(ioc, color) {
     card.addEventListener("click", () => flipCard(card));
     card.dataset.icon = icon;
 
-    return cardBack;
+    return card;
 }
 
 function flipCard(card){
@@ -67,9 +67,44 @@ function checkForMatch () {
         card2.classList.add("matched");
         matchedCards.push(card1, card2);
     }
+    // revove the cards if they don't match
     else {
         setTimeout( () => {
-            card1.classList.remove ("flipped")
-        })
+            card1.classList.remove ("flipped");
+            card2.classList.remove ("flipped");
+        }, 1000);
+    }
+
+    flippedCards = [];
+    checkGameOver();
+}
+
+function checkGameOver() {
+    if(matchedCards.length === icons.length){
+        status.innerText = "Winner";   
     }
 }
+
+function initGame(){
+    board.innerHTML = "";
+    status.innerText = "";
+    flippedCards = [];
+    matchedCards = [];
+
+    const shuffledIcons = [...icons];
+    shuffle(shuffledIcons);
+
+    shuffledIcons.forEach((icon, index) => {
+        const color = iconColors[index % iconColors.length];
+
+        const card = createCard (icon, color);
+        board.appendChild(card);
+    });
+}
+
+function resetGame(){
+    initGame();
+}
+
+//Initialise the game on page load
+initGame();
