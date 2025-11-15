@@ -4,17 +4,21 @@ const icons = [
 	"fa-heart", "fa-heart", "fa-star", "fa-star", "fa-moon", "fa-moon", "fa-bell", "fa-bell", "fa-car", "fa-car", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf", "fa-smile", "fa-smile"
 ];
 
+// References to DOM elements
 const BOARD = document.getElementById("game-board");
 const STATUS = document.getElementById("status");
 const resetBtn = document.getElementById("reset-btn");
 
+// Check the game state
 let flippedCards = [];
 let matchedCards = [];
+
+// Different colours for the icons
 const iconColors = ['#e74c3c', '#f1c40f', '#3498db', '#9b59b6', '#2ecc71', '#e67e22', '#1abc9c', '#ff4757'];
 
 resetBtn.addEventListener("click", resetGame);
 
-//Shuffle function
+//Shuffle function using the Fisher-Yates algorithm
 function shuffle(array){
 	for(let i = array.length - 1; i > 0; i--){
 		const j = Math.floor(Math.random() * (i + 1));
@@ -22,7 +26,7 @@ function shuffle(array){
 	}
 }
 
-//Function to create a card
+//Function to create a card dynamically
 function createCard(icon, color){
 	const card = document.createElement("div");
 	card.classList.add("card");
@@ -36,7 +40,10 @@ function createCard(icon, color){
 	const cardBack = document.createElement("div");
 	cardBack.classList.add("card-back");
 	cardBack.style.color = color;
-	cardBack.innerHTML = '';
+	
+	const iconElement = document.createElement("i");
+	iconElement.classList.add("fa-solid", icon);
+	cardBack.appendChild(iconElement);
 	
 	cardInner.appendChild(cardFront);
 	
@@ -44,11 +51,12 @@ function createCard(icon, color){
 	card.appendChild(cardInner);
 	
 	card.addEventListener("click", () => flipCard(card));
-	card.classList.add(icon);
+	card.dataset.icon = icon;
 	
 	return card;
 }
 
+// Flip cards
 function flipCard(card){
 	if(flippedCards.length === 2 || card.classList.contains("flipped") || card.classList.contains("matched")) return;
 	
@@ -59,6 +67,7 @@ function flipCard(card){
 		checkForMatch();
 }
 
+// Matching logic and check for a match
 function checkForMatch(){
 	const [card1, card2] = flippedCards;
 	
@@ -78,12 +87,14 @@ function checkForMatch(){
 	checkGameOver();
 }
 
+// Check if all the cards have been matched
 function checkGameOver(){
 	if(matchedCards.length === icons.length){
 		STATUS.innerText = "Congratulations! You Won!";
 	}
 }
 
+// Start game
 function initGame(){
 	BOARD.innerHTML = "";
 	STATUS.innerText = "";
@@ -101,11 +112,12 @@ function initGame(){
 	});
 }
 
+// Reset game
 function resetGame(){
 	initGame();
 }
 
-//Initialize the game on page load
+//Initialise the game on page load
 initGame();
 
   
