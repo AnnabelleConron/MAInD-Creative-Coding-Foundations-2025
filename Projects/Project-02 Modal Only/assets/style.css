@@ -11,8 +11,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #363731;
-    color: #C15932;
+    background-color: #f2f2f2;
+    color: #000000;
 }
 
 .game-container {
@@ -22,13 +22,13 @@ body {
 h1 {
     margin-bottom: 20px;
     font-size: 2rem;
-    color: #C15932;
+    color: grey;
 }
 
 #timer {
     font-size: 1.2rem;
     margin-bottom: 15px;
-    color: #C15932;
+    color: #000;
 }
 
 /* Modal Overlay */
@@ -46,7 +46,7 @@ h1 {
 
 /* Modal Box */
 .modal-content {
-    background-color: #fefefe;
+    background-color: #F2F2F2;
     margin: 15% auto;
     padding: 20px;
     border-radius: 6px;
@@ -57,7 +57,7 @@ h1 {
 
 /* Close Button */
 .close {
-    color: #aaa;
+    color: darkgray;
     float: right;
     font-size: 1.2rem;
     font-weight: bold;
@@ -67,13 +67,6 @@ h1 {
 .close:hover {
     color: black;
 }
-
-
-/* #game-stats {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-} */
 
 #game-board {
     display: grid;
@@ -108,7 +101,7 @@ h1 {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 1px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,25 +111,26 @@ h1 {
 /* Card Front: Trump Card*/
 
 .card-front {
-    background-color: #B4A128;
+    background-color: grey;
     color: #f4f4f4;
     background-position: 10px 0, 10px 0, 0 0, 0 0;
     background-size: 20px 20px;
     background-repeat: repeat;
-    border: 4px solid #8B8DC0;
+    border: 4px solid darkgrey;
 }
 
 .card-back {
     background-color: #f4f4f4;
     color: #000;
     transform: rotateY(180deg);
+    border: 4px solid darkgrey;
 }
 
 #status {
     margin-top: 20px;
     font-size: 1.2rem;
     font-weight: bold;
-    color: #C15932;
+    color: darkgray;
 }
 
 #reset-btn {
@@ -144,7 +138,7 @@ h1 {
     padding: 10px 20px;
     font-size: 1rem;
     border: none;
-    background-color: #C15932;
+    background-color: darkgrey;
     color: #f4f4f4;
     border-radius: 5px;
     cursor: pointer;
@@ -152,5 +146,5 @@ h1 {
 }
 
 #reset-btn:hover {
-    background-color: #EA8C46;
+    background-color: lightgrey;
 }

@@ -11,8 +11,6 @@ const resetBtn = document.getElementById("reset-btn");
 const timerDiv = document.getElementById("timer");
 // Modal
 const winModal = document.getElementById("winModal");
-const modalStatus = document.getElementById("modal-status");
-const modalTime = document.getElementById("modal-time");
 const closeBtn = document.querySelector(".close");
 
 
@@ -109,18 +107,18 @@ function checkForMatch(){
 }
 
 // Check if all the cards have been matched
-function checkGameOver(){
-	if(matchedCards.length === icons.length){
-		endGameTimer();  // compute final time
-		const resultText = "Congratulations! You Won!";
-    	const timeText = timerDiv.innerText; // already formatted
-		// Show modal
-        modalStatus.innerText = resultText;
-        modalTime.innerText = timeText;
-        winModal.style.display = "block";
+function checkGameOver() {
+    if (matchedCards.length === icons.length) {
 
-        STATUS.innerText = resultText; // Optional: still update page status
-	}
+        endGameTimer();
+
+        // Prepare modal content
+        STATUS.innerText = "Congratulations! You Won!";
+        timerDiv.innerText = timerDiv.innerText;
+
+        // Show modal
+        winModal.style.display = "block";
+    }
 }
 
 // Start game
@@ -141,11 +139,13 @@ function initGame(){
 	});
 }
 
-function resetGame(){
+function resetGame() {
     startTime = null;
     endTime = null;
-    timerDiv.innerText = "";
-    winModal.style.display = "none";   // hide modal if open
+
+    timerDiv.innerText = "";   
+    winModal.style.display = "none"; //Hide modal if open
+
     initGame();
 }
 
@@ -164,7 +164,6 @@ function endGameTimer() {
 function formatGameTime(ms) {
     const totalSeconds = Math.floor(ms / 1000);
 
-    const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
 
