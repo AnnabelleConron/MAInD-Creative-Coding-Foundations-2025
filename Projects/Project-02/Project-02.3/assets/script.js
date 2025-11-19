@@ -9,8 +9,8 @@ const BOARD = document.getElementById("game-board");
 const STATUS = document.getElementById("status");
 const resetBtn = document.getElementById("reset-btn");
 const timerDiv = document.getElementById("timer");
-const bestTimeDiv = document.getElementById("best-time");
 const nameInput = document.getElementById("name-input");
+const bestTimeDiv = document.getElementById("best-time");
 const winnerNameDiv = document.getElementById("winner-name");
 // Modal
 const winModal = document.getElementById("winModal");
@@ -30,9 +30,13 @@ let startTime = null;
 let endTime = null;
 
 // Different colours for the icons
-const iconColors = ['#e74c3c', '#f1c40f', '#3498db', '#9b59b6', '#2ecc71', '#e67e22', '#1abc9c', '#ff4757'];
+const iconColors = ['#FE3263', '#f1c40f', '#3498db', '#9b59b6', '#2ecc71', '#e67e22', '#1abc9c', '#ff4757'];
+const BOARD_COLUMNS = 4;
+let selectedCardIndex = 0;
+let hasKeyboardSelection = false;
 
 resetBtn.addEventListener("click", resetGame);
+document.addEventListener("keydown", handleKeyNavigation);
 
 //Shuffle function using the Fisher-Yates algorithm
 function shuffle(array){
@@ -146,6 +150,9 @@ function initGame(){
 		const card = createCard(icon, color);
 		BOARD.appendChild(card);
 	});
+
+	selectedCardIndex = 0;
+	hasKeyboardSelection = false;
 }
 
 function resetGame() {
@@ -160,16 +167,18 @@ function resetGame() {
 }
 
 function startGameTimer () {
-	if (startTime !== null) return; //Prevent resetting
-	startTime = new Date().getTime();   // Capture timestamp (ms)
+	if (startTime !== null) return;  //Prevent resetting
+	startTime = new Date().getTime();  // Capture timestamp (ms)
 }
 
+// End game timer and calculate duration
 function endGameTimer() {
-    endTime = new Date().getTime();          // Capture finish time
-    const durationMs = endTime - startTime;  // Time difference
-    const formatted = formatGameTime(durationMs);
+    endTime = new Date().getTime();  // Capture finish time
+    const durationMs = endTime - startTime;  // Calculate time difference
+    const formatted = formatGameTime(durationMs);  // Format time for display
     timerDiv.innerText = `Time: ${formatted}`;
-	saveBestTimeIfFaster(durationMs);
+	const playerName = nameInput.value.trim();  // Get trimmed #name-input value and passes into the best-time logic
+	saveBestTimeIfFaster(durationMs, playerName);
 }
 
 function formatGameTime(ms) {
@@ -188,15 +197,18 @@ function getStoredBestTime() {
 	return stored ? parseInt(stored, 10) : null;
 }
 
+// Update best time display with duration and player name
 function updateBestTimeDisplay() {
 	const bestTimeMs = getStoredBestTime();
-	bestTimeDiv.innerText = bestTimeMs !== null ? formatGameTime(bestTimeMs) : "Best Time";
+	const bestPlayerName = localStorage.getItem("bestPlayerName") || "Unknown";
+	bestTimeDiv.innerText = bestTimeMs !== null ? `Best Time: ${bestPlayerName} - ${formatGameTime(bestTimeMs)}` : "Best Time";
 }
 
-function saveBestTimeIfFaster(durationMs) {
+function saveBestTimeIfFaster(durationMs, playerName) {
 	const bestTimeMs = getStoredBestTime();
 	if (bestTimeMs === null || durationMs < bestTimeMs) {
 		localStorage.setItem("bestTimeMs", durationMs);
+		localStorage.setItem("bestPlayerName", playerName || "Unknown");  // Player name or "Unknown" if empty
 		updateBestTimeDisplay();
 	}
 }
@@ -212,6 +224,82 @@ window.onclick = function(event) {
         winModal.style.display = "none";
     }
 };
+
+function handleKeyNavigation(event) {
+	const activeElement = document.activeElement;
+	if (activeElement && (activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA")) return;
+
+	const cards = getCardElements();
+	if (!cards.length) return;
+
+	let newIndex = selectedCardIndex;
+	let moved = false;
+
+	switch (event.key) {
+		case "ArrowLeft":
+			if (selectedCardIndex % BOARD_COLUMNS !== 0) {
+				newIndex = selectedCardIndex - 1;
+				moved = true;
+			}
+			break;
+		case "ArrowRight":
+			if (selectedCardIndex % BOARD_COLUMNS !== BOARD_COLUMNS - 1 && selectedCardIndex + 1 < cards.length) {
+				newIndex = selectedCardIndex + 1;
+				moved = true;
+			}
+			break;
+		case "ArrowUp":
+			if (selectedCardIndex >= BOARD_COLUMNS) {
+				newIndex = selectedCardIndex - BOARD_COLUMNS;
+				moved = true;
+			}
+			break;
+		case "ArrowDown":
+			if (selectedCardIndex + BOARD_COLUMNS < cards.length) {
+				newIndex = selectedCardIndex + BOARD_COLUMNS;
+				moved = true;
+			}
+			break;
+		case "Enter":
+			if (!hasKeyboardSelection) return;
+			event.preventDefault();
+			flipCard(cards[selectedCardIndex]);
+			return;
+		default:
+			return;
+	}
+
+	if (!hasKeyboardSelection) {
+		hasKeyboardSelection = true;
+		highlightSelectedCard(cards);
+	}
+
+	if (moved && newIndex !== selectedCardIndex) {
+		selectedCardIndex = newIndex;
+		highlightSelectedCard(cards);
+		event.preventDefault();
+	} else if (hasKeyboardSelection) {
+		// Ensure highlight appears after first arrow, even if we hit a boundary
+		highlightSelectedCard(cards);
+	}
+}
+
+function getCardElements() {
+	return Array.from(BOARD.querySelectorAll(".card"));
+}
+
+	function highlightSelectedCard(existingCards = null) {
+		const cards = existingCards || getCardElements();
+		if (!hasKeyboardSelection) return;
+		cards.forEach(card => card.classList.remove("selected"));
+		if (!cards.length) return;
+
+	if (selectedCardIndex >= cards.length) {
+		selectedCardIndex = cards.length - 1;
+	}
+
+	cards[selectedCardIndex].classList.add("selected");
+}
 
 
 //Initialise the game on page load
