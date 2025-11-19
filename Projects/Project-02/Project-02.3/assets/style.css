@@ -154,6 +154,7 @@ h1 {
     background-color: #ffffff;
     color: #000;
     transform: rotateY(180deg);
+    border: 6px transparent;
 }
 
 .card.selected .card-front,

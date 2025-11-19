@@ -279,7 +279,7 @@ function handleKeyNavigation(event) {
 		highlightSelectedCard(cards);
 		event.preventDefault();
 	} else if (hasKeyboardSelection) {
-		// Ensure highlight appears after first arrow, even if we hit a boundary
+		// Ensure highlight appears after first arrow, even if player hits a boundary
 		highlightSelectedCard(cards);
 	}
 }
@@ -288,11 +288,11 @@ function getCardElements() {
 	return Array.from(BOARD.querySelectorAll(".card"));
 }
 
-	function highlightSelectedCard(existingCards = null) {
-		const cards = existingCards || getCardElements();
-		if (!hasKeyboardSelection) return;
-		cards.forEach(card => card.classList.remove("selected"));
-		if (!cards.length) return;
+function highlightSelectedCard(existingCards = null) {
+	const cards = existingCards || getCardElements();
+	if (!hasKeyboardSelection) return;
+	cards.forEach(card => card.classList.remove("selected"));
+	if (!cards.length) return;
 
 	if (selectedCardIndex >= cards.length) {
 		selectedCardIndex = cards.length - 1;
