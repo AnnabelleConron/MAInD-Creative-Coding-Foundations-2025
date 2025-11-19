@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Memory Match Card Game</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        
         <link rel="stylesheet" href="assets/style.css">
         <script src="assets/script.js" defer></script>
     </head>
@@ -15,16 +16,17 @@
             <h1>Memory Match</h1>
             <div id="game-stats">
                 <input type="text" id="name-input" placeholder="Enter Name">
-                <div id="recorded-time">Best Time 00min 00sec</div>
+                <div id="best-time">Best Time 00min 00sec</div>
             </div>
             <div id="game-board"></div>
             <button id="reset-btn">Reset Game</button>
             <!-- Win Modal -->
             <div id="winModal" class="modal">
                 <div class="modal-content">
-                <span class="close">&times;</span>
-                <div id="status"></div>
-                <div id="timer"></div>
+                    <span class="close">&times;</span>
+                    <div id="status"></div>
+                    <div id="winner-name"></div>
+                    <div id="timer"></div>
                 </div>
             </div>
 

@@ -12,6 +12,8 @@ const timerDiv = document.getElementById("timer");
 // Modal
 const winModal = document.getElementById("winModal");
 const closeBtn = document.querySelector(".close");
+// Sound
+const winSound = new Audio("./assets/sound/success_fanfare.mp3");
 
 
 // Check the game state
@@ -115,6 +117,8 @@ function checkGameOver() {
         // Prepare modal content
         STATUS.innerText = "Congratulations! You Won!";
         timerDiv.innerText = timerDiv.innerText;
+		// Play win sound
+		winSound.play();
 
         // Show modal
         winModal.style.display = "block";
