@@ -12,6 +12,8 @@ const timerDiv = document.getElementById("timer");
 const nameInput = document.getElementById("name-input");
 const bestTimeDiv = document.getElementById("best-time");
 const winnerNameDiv = document.getElementById("winner-name");
+const startBtn = document.getElementById("start-btn");
+
 // Modal
 const winModal = document.getElementById("winModal");
 const closeBtn = document.querySelector(".close");
@@ -22,6 +24,8 @@ const winSound = new Audio("./assets/sound/success_fanfare.mp3");
 // Check the game state
 let flippedCards = [];
 let matchedCards = [];
+
+let gameplay = false;
 
 // Timer variables
 // Time stamp on first flip
@@ -76,8 +80,27 @@ function createCard(icon, color){
 	return card;
 }
 
+startBtn.addEventListener('click', function(e){
+	let userName = nameInput.value
+
+	if (userName.length >= 3) {
+		console.log('start')
+		gameplay = true;
+	}
+
+	if (gameplay == true) {
+		const gameBoard = document.getElementById('game-board')
+		gameBoard.style.opacity = 1;
+	}
+	 
+
+})
+
 // Flip cards
 function flipCard(card){
+
+	if (gameplay == false) return
+	// make sure that the name input is filled before playing the game
 	if(flippedCards.length === 2 || 
 		card.classList.contains("flipped") || 
 		card.classList.contains("matched")) 
