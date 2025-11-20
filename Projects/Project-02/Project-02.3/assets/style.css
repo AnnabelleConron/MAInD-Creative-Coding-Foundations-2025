@@ -9,10 +9,20 @@
 }
 
 @font-face {
-    font-family: 'Feroniapi';
-    src: url('.assets/fonts/Feroniapi-MediumItalic.woff2') format('woff2');
+    font-family: "Feroniapi";
+    src: url('fonts/Feroniapi-MediumItalic.woff2') format('woff2');
     font-weight: normal;
     font-style: italic;
+}
+
+h1 {
+    font-family: 'Feroniapi', sans-serif;
+    padding-top: 0.5rem;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #D9FF9C;
 }
 
 body {
@@ -24,31 +34,43 @@ body {
     color: #000000;
 }
 
+input:focus {
+    outline: none;
+}
+
+button:focus {
+    outline: none;
+}
+
 #name-input {
     margin-bottom: 15px;
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 1px;
-    border: 1px transparent;
+    border: none;
     text-align: left;
+    flex-grow: 1;
 } 
 
 #start-btn {
-    margin-left: 10px;
-    padding: 0.5rem 1rem;
+    margin-bottom: 15px;
+    padding: 0.5rem;
     font-size: 1rem;
     border: none;
     background-color: #FDADBA;
     color: #1E1832;
     border-radius: 1px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+}
+
+#start-btn:hover {
+    background-color: #FBD9B3;
 }
 
 #best-time {
     margin-bottom: 15px;
     padding: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     border: 1px transparent;
     border-radius: 1px;
     text-align: left;
@@ -60,25 +82,21 @@ body {
     flex-direction: column;
 }
 
+#start-game {
+    margin-bottom: 15px;
+    gap: 1rem;
+}
+
 .game-container {
     text-align:left;
 }
 
-h1 {
-    font-family: "Feroniapi", sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: #D9FF9C;
-}
 
 #timer {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 15px;
     color: black;
     padding: 0.5rem;
-    margin-bottom: 15px;
 }
 
 /* Modal Overlay */
@@ -98,7 +116,7 @@ h1 {
 .modal-content {
     background-color: #ffffff;
     margin: 15% auto;
-    padding: 20px;
+    padding: 1rem;
     border-radius: 4px;
     width: 300px;
     text-align: center;
@@ -107,7 +125,7 @@ h1 {
 
 /* Close Button */
 .close {
-    color: #1E1832;
+    color: #FDADBA;
     float: right;
     font-size: 1.2rem;
     font-weight: bold;
@@ -115,7 +133,7 @@ h1 {
 }
 
 .close:hover {
-    color: #8515B7;
+    color: #FDADBA;
 }
 
 #game-board {
@@ -183,15 +201,16 @@ h1 {
 }
 
 #status {
-    margin-top: 20px;
-    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-size: 2rem;
     font-weight: bold;
-    color: black;
+    color: #FDADBA;
+    font-family: 'Feroniapi', sans-serif;
 }
 
 #reset-btn {
-    margin-top: 10px;
-    padding: 10px 20px;
+    margin-bottom: 15px;
+    padding: 1rem;
     font-size: 1rem;
     border: none;
     background-color: #D9FF9C;
@@ -205,9 +224,34 @@ h1 {
     background-color: #78FDAE;
 }
 
+#keybord-instructions {
+    margin-bottom: 15px;
+    margin-top: 5px;
+    padding: 1rem;
+    background-color: #FFFFFF;
+    color: #1E1832;
+    border-radius: 6px;
+    border: 6px solid #FDADBA;
+    font-size: 1.2rem;
+}
+
+#keybord-instructions ul {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+#keybord-instructions li {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
 /* Media Query */
 
 @media (min-width: 600px) {
+    h1 {
+        font-size: 4rem;
+    }
+    
     #game-board {
     gap: 1rem;
     }

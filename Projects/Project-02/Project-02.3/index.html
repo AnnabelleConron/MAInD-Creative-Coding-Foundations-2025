@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Memory Match Card Game</title>
+        <title>Memory Match</title>
         <!-- Style Sheet File -->
         <link rel="stylesheet" href="assets/style.css">
         <!-- Script File -->
@@ -12,7 +12,6 @@
         <!-- Icon Link -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <!-- Font Link -->
-        <link rel="stylesheet" href="assets/fonts/Feroniapi-MediumItalic.woff2">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Tourney:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -30,6 +29,16 @@
             </div>
             <div id="game-board"></div>
             <button id="reset-btn">Reset Game</button>
+            <div id="keybord-instructions">
+                <p>Keyboard Controls</p>
+                <ul>
+                    <li>↑ Move up</li>
+                    <li>↓ Move down</li>
+                    <li>← Move left</li>
+                    <li>→ Move right</li>
+                    <li>↵ Select</li>
+                </ul>
+            </div>
             <!-- Win Modal -->
             <div id="winModal" class="modal">
                 <div class="modal-content">
