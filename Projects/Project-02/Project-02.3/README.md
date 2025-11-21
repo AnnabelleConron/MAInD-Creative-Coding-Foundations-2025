@@ -17,7 +17,7 @@ Choose a “mini-game” to rebuild with HTML, CSS and JavaScript. The requireme
 ![Screenshot 4](DOCS/screenshot_04.png "Screenshot 4")
 
 ## Project Description
-I built Memory Match as a quick, personal icon-pairing challenge on a 4×4 grid. Sixteen cards hide eight Font Awesome pairs, shuffled each round with Fisher–Yates. Your first flip kicks off the timer; the second decides if it’s a match—pairs stay up, misses flip back after a beat. I track your current flips, matched pairs, and win state; when everything’s solved, the timer stops, a win modal pops, a fanfare plays, and your best time plus name go into localStorage. You can reset anytime to reshuffle and restart. Keyboard play mirrors clicks: arrow keys move a focus highlight and Enter flips, with on-screen reminders. A simple UI keeps status, timer, best-time leaderboard, and start/reset controls front and center for smooth replays.
+I built Memory Match as a quick, personal icon-pairing challenge on a 4×4 grid. Sixteen cards hide eight icon pairs, shuffled each round with Fisher–Yates. Your first flip kicks off the timer; the second decides if it’s a match—pairs stay up, misses flip back after a beat. I track the current flips, matched pairs, and win state; when everything’s solved, the timer stops, a win modal pops, a fanfare plays, and your best time plus name go into localStorage. You can reset anytime to reshuffle and restart. Keyboard play mirrors clicks: arrow keys move a focus highlight and Enter flips, with on-screen reminders. A simple UI keeps status, timer, best-time leaderboard, and start/reset controls front and center for smooth replays.
 
 ## Game Flow
 ![Flow Chart](DOCS/memory_game_flow_chart.svg "Game Flow Chart")
