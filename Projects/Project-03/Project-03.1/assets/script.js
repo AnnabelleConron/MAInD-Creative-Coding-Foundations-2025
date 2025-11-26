@@ -26,6 +26,9 @@ const nameInput = document.getElementById("name-input");
 const bestTimeDiv = document.getElementById("best-time");
 const winnerNameDiv = document.getElementById("winner-name");
 const startBtn = document.getElementById("start-btn");
+const loadingOverlay = document.getElementById("loading-overlay");
+const errorOverlay = document.getElementById("error-overlay");
+const retryBtn = document.getElementById("retry-btn");
 
 // Modal
 const winModal = document.getElementById("winModal");
@@ -55,6 +58,7 @@ let selectedCardIndex = 0;
 let hasKeyboardSelection = false;
 
 resetBtn.addEventListener("click", resetGame);
+retryBtn?.addEventListener("click", resetGame);
 document.addEventListener("keydown", handleKeyNavigation);
 
 //Shuffle function using the Fisher-Yates algorithm
@@ -62,6 +66,21 @@ function shuffle(array){
 	for(let i = array.length - 1; i > 0; i--){
 		const j = Math.floor(Math.random() * (i + 1));
 		[array[i], array[j]] = [array[j], array[i]];
+	}
+}
+
+// Function to toggle overlays based on gameState.status
+function setGameStatus(status) {
+	gameState.status = status;
+	updateStatusUI();
+}
+
+function updateStatusUI() {
+	if (loadingOverlay) {
+		loadingOverlay.style.display = gameState.status === "loading" ? "flex" : "none";
+	}
+	if (errorOverlay) {
+		errorOverlay.style.display = gameState.status === "error" ? "flex" : "none";
 	}
 }
 
@@ -247,19 +266,21 @@ async function initGame(){
 	flippedCards = [];
 	matchedCards = [];
 	
-	gameState.status = "loading";
+	setGameStatus("loading");
 	selectedCardIndex = 0;
 	hasKeyboardSelection = false;
+	STATUS.innerText = "Loading dogs...";
 
 	try {
 		const deck = await buildDogDeck(GAME_CONFIG.defaultPairs);
 		gameState.deck = deck;
 		renderDeck(gameState.deck);
-		gameState.status = "ready";
+		setGameStatus("ready");
+		STATUS.innerText = "";
 	} catch (err) {
 		console.error(err);
 		STATUS.innerText = "Loading failed. Click reset to retry.";
-		gameState.status = "error";
+		setGameStatus("error");
 	}
 
 }

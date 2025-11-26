@@ -27,7 +27,20 @@
                     <button id="start-btn">Start Game</button>
                 </div>
             </div>
-            <div id="game-board"></div>
+            <div class="board-wrap">
+                <div id="game-board"></div>
+                <!-- loading/error overlays -->
+                <div id="loading-overlay" class="status-overlay">
+                    <div class="overlay-content">Loading dogs...</div>
+                </div>
+                <div id="error-overlay" class="status-overlay">
+                    <div class="overlay-content">
+                        <p>Load failed. Retry?</p>
+                        <!-- retry button that calls resetGame(). -->
+                        <button id="retry-btn">Retry</button>
+                    </div>
+                </div>
+            </div>
             <button id="reset-btn">Reset Game</button>
             <div id="keybord-instructions">
                 <p>Keyboard Controls</p>
