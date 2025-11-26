@@ -1,0 +1,266 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "ABeeZee", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Feroniapi";
+    src: url('fonts/Feroniapi-MediumItalic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: italic;
+}
+
+h1 {
+    font-family: 'Feroniapi', sans-serif;
+    padding-top: 0.5rem;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #D9FF9C;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1E1832;
+    color: #000000;
+}
+
+input:focus {
+    outline: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+#name-input {
+    margin-bottom: 15px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 1px;
+    border: none;
+    text-align: left;
+    flex-grow: 1;
+} 
+
+#start-btn {
+    margin-bottom: 15px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #FDADBA;
+    color: #1E1832;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+#start-btn:hover {
+    background-color: #FBD9B3;
+}
+
+#best-time {
+    margin-bottom: 15px;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    border: 1px transparent;
+    border-radius: 1px;
+    text-align: left;
+    color: #D9FF9C;
+}
+
+#game-stats {
+    display: flex;
+    flex-direction: column;
+}
+
+#start-game {
+    margin-bottom: 15px;
+    gap: 1rem;
+}
+
+.game-container {
+    text-align:left;
+}
+
+
+#timer {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: black;
+    padding: 0.5rem;
+}
+
+/* Modal Overlay */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 10; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+/* Modal Box */
+.modal-content {
+    background-color: #ffffff;
+    margin: 15% auto;
+    padding: 1rem;
+    border-radius: 4px;
+    width: 300px;
+    text-align: center;
+    color: #1E1832;
+}
+
+/* Close Button */
+.close {
+    color: #FDADBA;
+    float: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #FDADBA;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    width: 400px;
+    margin: 0 auto 20px;
+    opacity: 0.5;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    perspective: 1000px;
+    /* Adds a 3D effect for flipping. */
+}
+
+.card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 6px solid #FBD9B3;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+/* Card Front: Trump Card*/
+
+.card-front {
+    background-color: #FDADBA;
+    color: #ffffff;
+    background-position: 10px 0, 10px 0, 0 0, 0 0;
+    background-size: 20px 20px;
+    background-repeat: repeat;
+}
+
+.card-back {
+    background-color: #ffffff;
+    color: #000;
+    transform: rotateY(180deg);
+    border: 6px transparent;
+}
+
+.card.selected .card-front,
+.card.selected .card-back {
+    border-color: #ffffff;
+}
+
+#status {
+    margin-bottom: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FDADBA;
+    font-family: 'Feroniapi', sans-serif;
+}
+
+#reset-btn {
+    margin-bottom: 15px;
+    padding: 1rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #D9FF9C;
+    color: #1E1832;
+    border-radius: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#reset-btn:hover {
+    background-color: #78FDAE;
+}
+
+#keybord-instructions {
+    margin-bottom: 15px;
+    margin-top: 5px;
+    padding: 1rem;
+    background-color: #FFFFFF;
+    color: #1E1832;
+    border-radius: 6px;
+    border: 6px solid #FDADBA;
+    font-size: 1.2rem;
+}
+
+#keybord-instructions ul {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+#keybord-instructions li {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Media Query */
+
+@media (min-width: 600px) {
+    h1 {
+        font-size: 4rem;
+    }
+    
+    #game-board {
+    gap: 1rem;
+    }
+
+    .game-container {
+    text-align:center;
+    }
+
+    #best-time, #name-input {
+    text-align: center;
+    }
+}
