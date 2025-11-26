@@ -78,11 +78,20 @@ function makeCard(source, pairIndex, copyIndex){
 	};
 }
 
-function buildLocalDeck(pairCount = GAME_CONFIG.defaultPairs){
-	const safePairCount = Math.min(pairCount, fallbackIcons.length);
-	const pairSources = fallbackIcons.slice(0, safePairCount).map((icon, index) => ({
-		icon,
-		imageUrl: null,
+// Fetch Dog CEO images and preload before building the deck
+async function buildDogDeck(pairCount = GAME_CONFIG.defaultPairs) {
+	const url = DOG_API.randomEndpoint(pairCount);
+	const res = await fetch(url);
+	if (!res.ok) throw new Error(`Dog API failed: ${res.status}`);
+	const data = await res.json();
+	if (!data.message || !Array.isArray(data.message)) throw new Error("Unexpected Dog API payload");
+
+	const urls = data.message.slice(0, pairCount);
+	await preloadImages(urls);
+
+	const pairSources = urls.map((imageUrl, index) => ({
+		imageUrl,
+		icon: null,
 		color: iconColors[index % iconColors.length]
 	}));
 
@@ -93,6 +102,15 @@ function buildLocalDeck(pairCount = GAME_CONFIG.defaultPairs){
 
 	shuffle(deck);
 	return deck;
+}
+
+function preloadImages(urls = []) {
+	return Promise.all(urls.map((src) => new Promise((resolve, reject) => {
+		const img = new Image();
+		img.onload = () => resolve();
+		img.onerror = () => reject(new Error(`Failed to load ${src}`));
+		img.src = src;
+	})));
 }
 
 //Function to create a card dynamically from data
@@ -223,19 +241,27 @@ function checkGameOver() {
 }
 
 // Start game
-function initGame(){
+async function initGame(){
 	BOARD.innerHTML = "";
 	STATUS.innerText = "";
 	flippedCards = [];
 	matchedCards = [];
 	
 	gameState.status = "loading";
-	gameState.deck = buildLocalDeck(GAME_CONFIG.defaultPairs);
-	renderDeck(gameState.deck);
-	gameState.status = "ready";
-
 	selectedCardIndex = 0;
 	hasKeyboardSelection = false;
+
+	try {
+		const deck = await buildDogDeck(GAME_CONFIG.defaultPairs);
+		gameState.deck = deck;
+		renderDeck(gameState.deck);
+		gameState.status = "ready";
+	} catch (err) {
+		console.error(err);
+		STATUS.innerText = "Loading failed. Click reset to retry.";
+		gameState.status = "error";
+	}
+
 }
 
 function resetGame() {
