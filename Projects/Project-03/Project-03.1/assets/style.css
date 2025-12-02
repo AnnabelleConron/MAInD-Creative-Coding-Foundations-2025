@@ -113,6 +113,9 @@ ul {
     min-width: 200px;
 }
 
+#play-game-btn, #instructions-container-play-game-btn {
+    margin-top: 10px;
+}
 
 .section-btn:hover, .menu-btn:hover, #play-game-btn:hover, #instructions-container-play-game-btn:hover {
     background-color: #78FDAE;
