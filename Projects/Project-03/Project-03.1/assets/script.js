@@ -1,4 +1,3 @@
-
 // API and game configuration object
 const DOG_API = {
 	base: "https://dog.ceo/api",
@@ -9,6 +8,13 @@ const DOG_API = {
 	// Function that returns the full URL for fetching count random images of a specific breed
 	defaultPairs: 8
 	// Default image-count/“card pairs”
+};
+
+// Theme configuration map for swapping APIs
+const THEMES = {
+	dogs: { label: "Dogs" },
+	foxes: { label: "Foxes" },
+	ducks: { label: "Ducks" }
 };
 
 // Settings object
@@ -36,6 +42,8 @@ const startBtn = document.getElementById("start-btn");
 const loadingOverlay = document.getElementById("loading-overlay");
 const errorOverlay = document.getElementById("error-overlay");
 const retryBtn = document.getElementById("retry-btn");
+const themeContainer = document.getElementById("theme-options");
+const loadingOverlayText = loadingOverlay?.querySelector(".overlay-content");
 
 // Menu
 const menu = document.getElementById("menu-section");
@@ -85,6 +93,7 @@ let matchedCards = [];
 let gameState = { status: "idle", deck: [] };
 const cardElementsById = new Map();
 // creates an empty Map to store DOM elements for the cards, keyed by a unique card ID. Using a Map (instead of a plain object)
+let currentTheme = "dogs";
 
 let gameplay = false;
 
@@ -200,7 +209,7 @@ function createCardElement(cardData){
 	if (cardData.imageUrl) {
 		const img = document.createElement("img");
 		img.src = cardData.imageUrl;
-		img.alt = "Dog card";
+		img.alt = "Theme card";
 		cardBack.appendChild(img);
 	} else {
 		const iconElement = document.createElement("i");
@@ -216,6 +225,67 @@ function createCardElement(cardData){
 	card.addEventListener("click", () => flipCard(card));
 	
 	return card;
+}
+
+// shared fetch helper for APIs that only return one image per request
+async function fetchImages(count, fetcher) {
+	const requests = Array.from({ length: count }, () => fetcher());
+	const results = await Promise.all(requests);
+	return results;
+}
+
+async function buildFoxDeck(pairCount = GAME_CONFIG.defaultPairs) {
+	const fetcher = async () => {
+		const res = await fetch("https://randomfox.ca/floof/");
+		if (!res.ok) throw new Error(`Fox API failed: ${res.status}`);
+		const data = await res.json();
+		if (!data.image) throw new Error("Unexpected Fox API payload");
+		return data.image;
+	};
+
+	const urls = await fetchImages(pairCount, fetcher);
+	await preloadImages(urls);
+
+	const pairSources = urls.map((imageUrl, index) => ({
+		imageUrl,
+		icon: null,
+		color: iconColors[index % iconColors.length]
+	}));
+
+	const deck = pairSources.flatMap((source, pairIndex) => ([
+		makeCard(source, pairIndex, 0),
+		makeCard(source, pairIndex, 1)
+	]));
+
+	shuffle(deck);
+	return deck;
+}
+
+async function buildDuckDeck(pairCount = GAME_CONFIG.defaultPairs) {
+	const fetcher = async () => {
+		const res = await fetch("https://random-d.uk/api/v2/random");
+		if (!res.ok) throw new Error(`Duck API failed: ${res.status}`);
+		const data = await res.json();
+		if (!data.url) throw new Error("Unexpected Duck API payload");
+		return data.url;
+	};
+
+	const urls = await fetchImages(pairCount, fetcher);
+	await preloadImages(urls);
+
+	const pairSources = urls.map((imageUrl, index) => ({
+		imageUrl,
+		icon: null,
+		color: iconColors[index % iconColors.length]
+	}));
+
+	const deck = pairSources.flatMap((source, pairIndex) => ([
+		makeCard(source, pairIndex, 0),
+		makeCard(source, pairIndex, 1)
+	]));
+
+	shuffle(deck);
+	return deck;
 }
 
 startBtn.addEventListener('click', function(e){
@@ -312,14 +382,18 @@ async function initGame(){
 	STATUS.innerText = "";
 	flippedCards = [];
 	matchedCards = [];
+	gameState.deck = [];
 	
 	setGameStatus("loading");
 	selectedCardIndex = 0;
 	hasKeyboardSelection = false;
-	STATUS.innerText = "Loading dogs...";
+	const themeLabel = THEMES[currentTheme]?.label || "Animals";
+	const loadingText = `Loading ${themeLabel.toLowerCase()}...`;
+	STATUS.innerText = loadingText;
+	if (loadingOverlayText) loadingOverlayText.textContent = loadingText;
 
 	try {
-		const deck = await buildDogDeck(GAME_CONFIG.defaultPairs);
+		const deck = await buildDeckForTheme(currentTheme, GAME_CONFIG.defaultPairs);
 		gameState.deck = deck;
 		renderDeck(gameState.deck);
 		setGameStatus("ready");
@@ -327,6 +401,7 @@ async function initGame(){
 	} catch (err) {
 		console.error(err);
 		STATUS.innerText = "Loading failed. Click reset to retry.";
+		if (loadingOverlayText) loadingOverlayText.textContent = loadingText;
 		setGameStatus("error");
 	}
 
@@ -496,6 +571,48 @@ function renderDeck(deck) {
 		cardElementsById.set(cardData.id, card);
 		BOARD.appendChild(card);
 	});
+}
+
+// Theme selection logic
+function highlightThemeSelection(themeKey) {
+	if (!themeContainer) return;
+	const buttons = themeContainer.querySelectorAll(".theme-option");
+	buttons.forEach(btn => {
+		if (btn.dataset.theme === themeKey) {
+			btn.classList.add("active-theme");
+		} else {
+			btn.classList.remove("active-theme");
+		}
+	});
+}
+
+async function buildDeckForTheme(themeKey, pairCount) {
+	switch (themeKey) {
+		case "foxes":
+			return buildFoxDeck(pairCount);
+		case "ducks":
+			return buildDuckDeck(pairCount);
+		case "dogs":
+		default:
+			return buildDogDeck(pairCount);
+	}
+}
+
+function setTheme(themeKey) {
+	if (!THEMES[themeKey]) return;
+	currentTheme = themeKey;
+	highlightThemeSelection(themeKey);
+	resetGame();
+}
+
+if (themeContainer) {
+	themeContainer.addEventListener("click", (event) => {
+		const target = event.target;
+		if (!(target instanceof HTMLElement)) return;
+		const themeKey = target.dataset.theme;
+		if (themeKey) setTheme(themeKey);
+	});
+	highlightThemeSelection(currentTheme);
 }
 
 

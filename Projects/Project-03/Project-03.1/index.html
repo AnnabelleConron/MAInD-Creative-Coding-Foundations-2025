@@ -25,7 +25,7 @@
         
         <div id="menu-section"> 
             <h2>Game Menu</h2>
-            <ul>
+            <ul id="menu-options">
                 <li><button class="section-btn" id="theme-menu-btn">Game Theme</button></li>
                 <li><button class="section-btn" id="game-board-menu-btn">Game Board</button></li>
                 <li><button class="section-btn" id="instructions-menu-btn">Game Controls</button></li>
@@ -36,10 +36,11 @@
             <h2>Select Theme</h2>
             <div id="theme-options">
                 <button class="theme-option" data-theme="dogs">Dogs</button>
-                <button class="theme-option" data-theme="cats">Cats</button>
-                <button class="theme-option" data-theme="birds">Birds</button>
+                <button class="theme-option" data-theme="foxes">Foxes</button>
+                <button class="theme-option" data-theme="ducks">Ducks</button>
             </div>
             <button class="menu-btn">Back to Menu</button>
+            <button class="section-btn">Play Game</button>
         </div>
 
         <div class="webpage-section" id="game-container">
@@ -48,21 +49,23 @@
                 <div id="best-time">Best Time 00min 00sec</div>
                 <div id="start-game">
                     <input type="text" id="name-input" placeholder="Enter Name to Start">
-                    <button id="start-btn">Start Game</button>
-                    <button class="menu-btn">Menu</button>
+                    <div id="start-game-buttons">
+                        <button id="start-btn">Start</button>
+                        <button class="menu-btn" id="game-menu-btn">Menu</button>
+                    </div>
                 </div>
             </div>
 
             <div class="board-wrap">
                 <div id="game-board"></div>
-                <!-- loading/error overlays -->
+                <!-- Loading/error overlay -->
                 <div id="loading-overlay" class="status-overlay">
-                    <div class="overlay-content">Loading dogs...</div>
+                    <div class="overlay-content">Loading...</div>
                 </div>
                 <div id="error-overlay" class="status-overlay">
                     <div class="overlay-content">
                         <p>Load failed. Retry?</p>
-                        <!-- retry button that calls resetGame(). -->
+                        <!-- Retry button that calls resetGame(). -->
                         <button id="retry-btn">Retry</button>
                     </div>
                 </div>
@@ -82,7 +85,7 @@
         </div>
 
         <div class="webpage-section" id="instructions-container">
-            <h2>Instructions</h2>
+            <h2>Game Controls</h2>
             <div>
                 <ul id="keybord-instructions">
                     <li>↑ Move up</li>
@@ -93,6 +96,7 @@
                 </ul>
             </div>
             <button class="menu-btn">Back to Menu</button>
+            <button class="section-btn">Play Game</button>
         </div>
 
     </body>
