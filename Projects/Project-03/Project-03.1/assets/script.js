@@ -1,15 +1,22 @@
 
-// API + game configuration
+// API and game configuration object
 const DOG_API = {
 	base: "https://dog.ceo/api",
+	// Base API URL string
 	randomEndpoint: (count) => `https://dog.ceo/api/breeds/image/random/${count}`,
+	// Function that returns the full URL for fetching count random dog images across all breeds
 	randomByBreed: (breed, count) => `https://dog.ceo/api/breed/${breed}/images/random/${count}`,
+	// Function that returns the full URL for fetching count random images of a specific breed
 	defaultPairs: 8
+	// Default image-count/“card pairs”
 };
 
+// Settings object
 const GAME_CONFIG = {
 	boardColumns: 4,
+	// Sets the board width to 4 columns (so a grid layout can place cards 4 across)
 	defaultPairs: DOG_API.defaultPairs
+	// Reuses the default pair count defined in DOG_API (8)
 };
 
 // Fallback icons used until Dog CEO images are wired in
@@ -30,6 +37,40 @@ const loadingOverlay = document.getElementById("loading-overlay");
 const errorOverlay = document.getElementById("error-overlay");
 const retryBtn = document.getElementById("retry-btn");
 
+// Menu
+const menu = document.getElementById("menu-section");
+const sections = document.querySelectorAll(".webpage-section");
+const menuPairs = [
+  { btnId: "theme-menu-btn", sectionId: "theme-container" },
+  { btnId: "game-board-menu-btn", sectionId: "game-container" },
+  { btnId: "instructions-menu-btn", sectionId: "instructions-container" } // update HTML id to match
+];
+const menuButtons = document.querySelectorAll(".menu-btn");
+
+function showSection(sectionId) {
+  // hide header
+  menu.style.display = "none";
+  // hide all sections, then reveal only the target
+  sections.forEach(sec => {
+    sec.style.display = sec.id === sectionId ? "block" : "none";
+  });
+}
+
+menuPairs.forEach(({ btnId, sectionId }) => {
+  const btn = document.getElementById(btnId);
+  if (btn) btn.addEventListener("click", () => showSection(sectionId));
+});
+
+function showMenuSection() {
+  menu.style.display = "block";
+  sections.forEach(sec => {
+    sec.style.display = "none";
+  });
+}
+
+menuButtons.forEach(btn => btn.addEventListener("click", showMenuSection));
+
+
 // Modal
 const winModal = document.getElementById("winModal");
 const closeBtn = document.querySelector(".close");
@@ -37,19 +78,21 @@ const closeBtn = document.querySelector(".close");
 const winSound = new Audio("./assets/sound/success_fanfare.mp3");
 
 
+
 // Check the game state
 let flippedCards = [];
 let matchedCards = [];
 let gameState = { status: "idle", deck: [] };
 const cardElementsById = new Map();
+// creates an empty Map to store DOM elements for the cards, keyed by a unique card ID. Using a Map (instead of a plain object)
 
 let gameplay = false;
 
 // Timer variables
-// Time stamp on first flip
 let startTime = null;
-// Time stamp when game ends
+// Time stamp on first flip
 let endTime = null;
+// Time stamp when game ends
 
 // Different colours for the icons
 const iconColors = ['#FE3263', '#f1c40f', '#3498db', '#9b59b6', '#2ecc71', '#e67e22', '#1abc9c', '#ff4757'];
@@ -97,14 +140,18 @@ function makeCard(source, pairIndex, copyIndex){
 	};
 }
 
-// Fetch Dog CEO images and preload before building the deck
+// Build the deck of cards by pulling random dog images from Dog CEO and turning them into paired card objects
 async function buildDogDeck(pairCount = GAME_CONFIG.defaultPairs) {
 	const url = DOG_API.randomEndpoint(pairCount);
 	const res = await fetch(url);
+	// Forms the API URL with DOG_API.randomEndpoint(pairCount) /breeds/image/random/8 and fetches it.
 	if (!res.ok) throw new Error(`Dog API failed: ${res.status}`);
+	// If http response isn’t OK, it throws Dog API failed: <status>
 	const data = await res.json();
-	if (!data.message || !Array.isArray(data.message)) throw new Error("Unexpected Dog API payload");
-
+	if (!data.message || !Array.isArray(data.message)) throw new Error("Unexpected Dog API load");
+	// If the response JSON doesn’t have a message array, it throws Unexpected Dog API load
+	
+	// Preload images to avoid flicker during gameplay
 	const urls = data.message.slice(0, pairCount);
 	await preloadImages(urls);
 

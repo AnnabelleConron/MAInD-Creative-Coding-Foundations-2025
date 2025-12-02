@@ -21,17 +21,69 @@ h1 {
     font-style: normal;
     font-weight: 600;
     font-size: 2.5rem;
+    color: #D9FF9C;
+}
+
+h2 {
+    font-family: 'Feroniapi', sans-serif;
+    padding-top: 0.5rem;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2rem;
     margin-bottom: 15px;
     color: #D9FF9C;
+    justify-self: center;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 1rem;
 }
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: #1E1832;
     color: #000000;
+}
+
+.webpage-section {
+    display: none;
+    justify-content: center;
+}
+
+#menu-container, #theme-container, #game-container, #instructions-container {
+    text-align: center;
+}
+
+.menu-btn {
+    margin-bottom: 15px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #D9FF9C;
+    color: #1E1832;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+.menu-btn:hover {
+    background-color: #FBD9B3;
+}
+
+.section-btn {
+    margin-bottom: 15px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #D9FF9C;
+    color: #1E1832;
+    border-radius: 1px;
+    cursor: pointer;
 }
 
 input:focus {
@@ -40,6 +92,25 @@ input:focus {
 
 button:focus {
     outline: none;
+}
+
+.theme-option {
+    margin: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #FDADBA;
+    color: #1E1832;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 #name-input {
@@ -87,10 +158,9 @@ button:focus {
     gap: 1rem;
 }
 
-.game-container {
+#game-container {
     text-align:left;
 }
-
 
 #timer {
     font-size: 1rem;
@@ -284,11 +354,6 @@ button:focus {
     font-size: 1.2rem;
 }
 
-#keybord-instructions ul {
-    list-style: none;
-    margin-top: 0.5rem;
-}
-
 #keybord-instructions li {
     padding: 0.5rem;
     font-size: 1rem;
@@ -305,11 +370,19 @@ button:focus {
     gap: 1rem;
     }
 
-    .game-container {
+    #game-container {
     text-align:center;
     }
 
     #best-time, #name-input {
     text-align: center;
+    }
+
+    ul {
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
     }
 }
