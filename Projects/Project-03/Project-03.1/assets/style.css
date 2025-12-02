@@ -28,11 +28,12 @@ button:focus {
 
 h1 {
     font-family: 'Feroniapi', sans-serif;
-    padding-top: 0.5rem;
+    padding-top: 0.2rem;
     font-style: normal;
     font-weight: 600;
     font-size: 2.5rem;
     color: #D9FF9C;
+    margin-bottom: 10px;
 }
 
 h2 {
@@ -41,9 +42,9 @@ h2 {
     font-weight: 500;
     font-size: 1.5rem;
     color: #D9FF9C;
-    padding: 0.5rem;
-    padding-bottom: 1.5rem;
+    padding: 0.2rem;
     justify-self: center;
+    margin-bottom: 10px;
 }
 
 
@@ -79,7 +80,7 @@ ul {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-bottom: 15px;
+    margin: 15px;
 }
 
 
@@ -90,8 +91,18 @@ ul {
     justify-content: center;
 }
 
-.menu-btn, .section-btn {
-    margin-bottom: 15px;
+.section-btn {
+    padding: 1rem;
+    font-size: 1.5rem;
+    border: none;
+    background-color: #D9FF9C;
+    color: #1E1832;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 200px;
+}
+
+.menu-btn, #play-game-btn {
     padding: 0.5rem;
     font-size: 1rem;
     border: none;
@@ -102,7 +113,8 @@ ul {
     min-width: 200px;
 }
 
-.section-btn:hover, .menu-btn:hover {
+
+.section-btn:hover, .menu-btn:hover, #play-game-btn:hover {
     background-color: #78FDAE;
 }
 
@@ -146,8 +158,8 @@ ul {
 }
 
 #best-time {
-    margin-bottom: 15px;
-    padding: 0.5rem;
+    margin-bottom: 10px;
+    padding: 0.2rem;
     font-size: 1.2rem;
     border: 1px transparent;
     border-radius: 4px;
@@ -163,7 +175,6 @@ ul {
 }
 
 #name-input {
-    margin-bottom: 15px;
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 4px;
@@ -174,15 +185,14 @@ ul {
 
 #start-game-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 1rem;
     flex-grow: 1;
 }
 
 #start-btn {
-    width: 50%;
+    flex-grow: 1;
     justify-content: center;
-    margin-bottom: 15px;
     padding: 0.5rem;
     font-size: 1rem;
     border: none;
@@ -197,16 +207,18 @@ ul {
 }
 
 #game-menu-btn {
+    padding: 0.5rem;
     min-width: 0px;
-    width: 50%;
     justify-content: center;
+    flex-grow: 1;
 }
 
 /* Game board overly */
 /* Overlays to cover the board and styled the retry button */
 .board-wrap {
     position: relative;
-    width: 400px;
+    width: 100%;
+    min-height: 200px;
     margin: 0 auto 20px;
 }
 
@@ -241,8 +253,10 @@ ul {
 }
 
 #reset-btn, #retry-btn {
-    margin-bottom: 15px;
-    padding: 1rem;
+    min-width: 0px;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 0.5rem;
     font-size: 1rem;
     border: none;
     background-color: #D9FF9C;
@@ -254,13 +268,6 @@ ul {
 
 #reset-btn:hover, #retry-btn:hover {
     background-color: #78FDAE;
-}
-
-#timer {
-    font-size: 1rem;
-    margin-bottom: 15px;
-    color: black;
-    padding: 0.5rem;
 }
 
 /* Modal Overlay */
@@ -287,6 +294,23 @@ ul {
     color: #1E1832;
 }
 
+/* Time */
+#timer {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: black;
+    padding: 0.5rem;
+}
+
+/* Status */
+#status {
+    margin-bottom: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FDADBA;
+    font-family: 'Feroniapi', sans-serif;
+}
+
 /* Close Button */
 .close {
     color: #FDADBA;
@@ -300,14 +324,12 @@ ul {
     color: #FDADBA;
 }
 
-
-
+/* Cards */
 .card {
     position: relative;
-    width: 100%;
+    width: 100px;
     height: 100px;
-    perspective: 1000px;
-    /* Adds a 3D effect for flipping. */
+    perspective: 1000px; /* Adds a 3D effect for flipping. */
 }
 
 .card-inner {
@@ -335,8 +357,7 @@ ul {
     font-size: 1rem;
 }
 
-/* Card Front: Trump Card*/
-
+/* Card Front*/
 .card-front {
     background-color: #FDADBA;
     color: #ffffff;
@@ -345,6 +366,7 @@ ul {
     background-repeat: repeat;
 }
 
+/* Card Back */
 .card-back {
     background-color: #ffffff;
     color: #000;
@@ -359,18 +381,14 @@ ul {
     border-radius: 6px;
 }
 
+/* Card Selected */
 .card.selected .card-front,
 .card.selected .card-back {
     border-color: #ffffff;
 }
 
-#status {
-    margin-bottom: 15px;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #FDADBA;
-    font-family: 'Feroniapi', sans-serif;
-}
+
+/* Game Controls ---------------------------------------------------------------------------------- */
 
 #instructions-container {
     width: 200px;
@@ -392,25 +410,18 @@ ul {
     font-size: 1rem;
 }
 
-/* Media Query */
+/* Media Query ----------------------------------------------------------------------------------- */
 
-@media (min-width: 600px) {
+@media (min-width: 670px) {
+    
     h1 {
-        font-size: 4rem;
+        font-size: 3rem;
     }
 
     h2 {
         font-size: 2.5rem;
     }
     
-    #game-board {
-    gap: 1rem;
-    }
-
-    #best-time, #name-input {
-    text-align: center;
-    }
-
     ul {
     display: flex;
     list-style: none;
@@ -426,34 +437,27 @@ ul {
     margin-bottom: 15px;
     }
 
+    #game-board {
+    gap: 1rem;
+    }
+
+    #best-time, #name-input {
+    text-align: center;
+    }
+
+    .card {
+    width: 150px;
+    height: 150px;
+    }
+
     #instructions-container {
     width: auto;
     }
 
-    /* #start-game {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    flex-grow: 1;
-    }
-
-    #start-game-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-grow: 1;
-    }
-
-    #start-btn, #game-menu-btn {
-    justify-content: center;
-    width: 50%;
-    }
-
-    #name-input {
-    width: 100%;
-    } */
 }
 
 @media (max-width: 415px) {
+    
     h1 {
         font-size: 2rem;
     }
@@ -487,6 +491,10 @@ ul {
     gap: 0.5rem;
     width: 100%;
     opacity: 0.5;
+    }
+
+    .card {
+        width: 100%;
     }
 
     #name-input {
