@@ -12,17 +12,20 @@ const FOX_API = {
 	extractUrl: (data) => data.image
 };
 
-// Theme identifiers and metadata
+// Theme identifiers and 
+// Theme data types
 const THEMES = {
 	DOGS: "dogs",
 	FOXES: "foxes"
 };
 
+// For the loading/status messaging
 const THEME_META = {
 	[THEMES.DOGS]: { label: "Dogs" },
 	[THEMES.FOXES]: { label: "Foxes" }
 };
 
+// Mapping of theme keys to their respective deck builder functions
 const THEME_BUILDERS = {
 	[THEMES.DOGS]: buildDogDeck,
 	[THEMES.FOXES]: buildFoxDeck
@@ -62,17 +65,19 @@ const loadingOverlayText = loadingOverlay?.querySelector(".overlay-content");
 const menu = document.getElementById("menu-section");
 const sections = document.querySelectorAll(".webpage-section");
 const menuPairs = [
-  { btnId: "theme-menu-btn", sectionId: "theme-container" },
-  { btnId: "game-board-menu-btn", sectionId: "game-container" },
-  { btnId: "instructions-menu-btn", sectionId: "instructions-container" },
-  { btnId: "play-game-btn", sectionId: "game-container" }
+	{ btnId: "theme-menu-btn", sectionId: "theme-container" },
+	{ btnId: "game-board-menu-btn", sectionId: "game-container" },
+	{ btnId: "instructions-menu-btn", sectionId: "instructions-container" },
+	{ btnId: "play-game-btn", sectionId: "game-container" },
+	{ btnId: "instructions-container-play-game-btn", sectionId: "game-container" }
 ];
 const menuButtons = document.querySelectorAll(".menu-btn");
 
+// Shows or hides HTML sections based on which button is clicked
 function showSection(sectionId) {
-  // hide header
+  // Hide menu
   menu.style.display = "none";
-  // hide all sections, then reveal only the target
+  // Hide all sections, then reveal only the target
   sections.forEach(sec => {
     sec.style.display = sec.id === sectionId ? "block" : "none";
   });
@@ -95,6 +100,7 @@ menuButtons.forEach(btn => btn.addEventListener("click", showMenuSection));
 // Modal
 const winModal = document.getElementById("winModal");
 const closeBtn = document.querySelector(".close");
+
 // Sound
 const WIN_SOUNDS = {
 	[THEMES.DOGS]: "./assets/sound/dog_sound.m4a",
@@ -110,8 +116,6 @@ function createWinSound(themeKey) {
 
 let winSound = createWinSound(currentTheme);
 
-
-
 // Check the game state
 let flippedCards = [];
 let matchedCards = [];
@@ -119,6 +123,7 @@ let gameState = { status: "idle", deck: [] };
 const cardElementsById = new Map();
 // creates an empty Map to store DOM elements for the cards, keyed by a unique card ID. Using a Map (instead of a plain object)
 
+// When name input is filled and start button clicked the gameplay variable is set to true
 let gameplay = false;
 
 // Timer variables
@@ -134,7 +139,7 @@ let selectedCardIndex = 0;
 let hasKeyboardSelection = false;
 
 resetBtn.addEventListener("click", resetGame);
-retryBtn?.addEventListener("click", resetGame);
+retryBtn.addEventListener("click", resetGame);
 document.addEventListener("keydown", handleKeyNavigation);
 
 //Shuffle function using the Fisher-Yates algorithm
@@ -251,7 +256,7 @@ function createCardElement(cardData){
 	return card;
 }
 
-// shared fetch helper for APIs that only return one image per request
+// Fetch helper for Fox API that only return one image per request
 async function fetchImages(count, fetcher) {
 	const requests = Array.from({ length: count }, () => fetcher());
 	const results = await Promise.all(requests);
@@ -306,11 +311,12 @@ startBtn.addEventListener('click', function(e){
 function flipCard(card){
 
 	if (gameplay == false || gameState.status !== "ready") return
-	// make sure that the name input is filled before playing the game
+	// Ignores input if it’s not in "ready" state, makes sure that the name input is filled before playing the game
 	if(flippedCards.length === 2 || 
 		card.classList.contains("flipped") || 
 		card.classList.contains("matched")) 
 	return;
+	//Prevents more than two concurrent flips and avoids re-flipping already matched cards.
 
 	// Start timer on first meaningful flip
 	if (startTime === null) {
@@ -329,7 +335,7 @@ function flipCard(card){
 		checkForMatch();
 }
 
-// Matching logic and check for a match
+// Matching logic and check for a match, compares the two flipped cards using their shared pairKey
 function checkForMatch(){
 	const [card1, card2] = flippedCards;
 	const cardEl1 = getCardElementById(card1.id);
@@ -358,7 +364,7 @@ function checkForMatch(){
 // Check if all the cards have been matched
 function checkGameOver() {
     if (matchedCards.length === gameState.deck.length) {
-
+		// End timer computes the duration using Date.getTime()
         endGameTimer();
 
         // Prepare modal content
@@ -456,11 +462,13 @@ function updateBestTimeDisplay() {
 }
 
 function saveBestTimeIfFaster(durationMs, playerName) {
+	// Compares against the stored best time in localStorage
 	const bestTimeMs = getStoredBestTime();
 	if (bestTimeMs === null || durationMs < bestTimeMs) {
 		localStorage.setItem("bestTimeMs", durationMs);
 		localStorage.setItem("bestPlayerName", playerName || "Unknown");  // Player name or "Unknown" if empty
 		updateBestTimeDisplay();
+		// Updates both the storage and the #best-time element if the time has improved
 	}
 }
 
@@ -477,13 +485,17 @@ window.onclick = function(event) {
 };
 
 function handleKeyNavigation(event) {
+	// Attached to document.addEventListener("keydown", handleKeyNavigation)
 	if (gameState.status !== "ready") return;
+	// Ignores key presses while the game is loading or when the user is typing in an input field
 	const activeElement = document.activeElement;
 	if (activeElement && (activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA")) return;
 
+	// Treats the oard as an array of cards and translate arrow presses into index changes
 	const cards = getCardElements();
 	if (!cards.length) return;
 
+	// Tracks a linear index across the grid
 	let newIndex = selectedCardIndex;
 	let moved = false;
 
@@ -493,18 +505,21 @@ function handleKeyNavigation(event) {
 				newIndex = selectedCardIndex - 1;
 				moved = true;
 			}
+			// Update newIndex if not at left boundary
 			break;
 		case "ArrowRight":
 			if (selectedCardIndex % BOARD_COLUMNS !== BOARD_COLUMNS - 1 && selectedCardIndex + 1 < cards.length) {
 				newIndex = selectedCardIndex + 1;
 				moved = true;
 			}
+			// Update newIndex if not at right boundary
 			break;
 		case "ArrowUp":
 			if (selectedCardIndex >= BOARD_COLUMNS) {
 				newIndex = selectedCardIndex - BOARD_COLUMNS;
 				moved = true;
 			}
+			// Move by BOARD_COLUMNS steps
 			break;
 		case "ArrowDown":
 			if (selectedCardIndex + BOARD_COLUMNS < cards.length) {
@@ -514,8 +529,10 @@ function handleKeyNavigation(event) {
 			break;
 		case "Enter":
 			if (!hasKeyboardSelection) return;
+			// Avoids highlighting until the user first presses an arrow key
 			event.preventDefault();
 			flipCard(cards[selectedCardIndex]);
+			// Uses the flipCard logic
 			return;
 		default:
 			return;
@@ -545,6 +562,7 @@ function getCardElementById(cardId) {
 }
 
 function highlightSelectedCard(existingCards = null) {
+	// Updates the visual highlight based on selectedCardIndex
 	const cards = existingCards || getCardElements();
 	if (!hasKeyboardSelection) return;
 	cards.forEach(card => card.classList.remove("selected"));
@@ -555,6 +573,7 @@ function highlightSelectedCard(existingCards = null) {
 	}
 
 	cards[selectedCardIndex].classList.add("selected");
+	// CSS .card.selected class changes the border colour
 }
 
 function findCardData(cardId) {
@@ -613,4 +632,3 @@ if (themeContainer) {
 updateBestTimeDisplay();
 initGame();
 
-  

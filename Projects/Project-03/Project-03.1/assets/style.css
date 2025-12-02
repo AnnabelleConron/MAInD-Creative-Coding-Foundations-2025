@@ -102,7 +102,7 @@ ul {
     min-width: 200px;
 }
 
-.menu-btn, #play-game-btn {
+.menu-btn, #play-game-btn, #instructions-container-play-game-btn {
     padding: 0.5rem;
     font-size: 1rem;
     border: none;
@@ -114,7 +114,7 @@ ul {
 }
 
 
-.section-btn:hover, .menu-btn:hover, #play-game-btn:hover {
+.section-btn:hover, .menu-btn:hover, #play-game-btn:hover, #instructions-container-play-game-btn:hover {
     background-color: #78FDAE;
 }
 
