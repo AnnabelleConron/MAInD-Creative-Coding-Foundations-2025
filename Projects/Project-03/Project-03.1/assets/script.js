@@ -167,9 +167,11 @@ function updateStatusUI() {
 
 // Function to create a card object from API source with fallback icon
 function makeCard(source, pairIndex, copyIndex){
+	// Each unique image is turned into a pair of card objects
 	return {
 		id: `${pairIndex}-${copyIndex}`,
 		pairKey: `pair-${pairIndex}`,
+		// Card pair oject has a shared pairKey for matching logic
 		imageUrl: source.imageUrl || null,
 		icon: source.icon || null,
 		color: source.color || null,
@@ -260,6 +262,7 @@ function createCardElement(cardData){
 async function fetchImages(count, fetcher) {
 	const requests = Array.from({ length: count }, () => fetcher());
 	const results = await Promise.all(requests);
+	// The fetchImages function runs multiple fetches in parallel using Promise.all
 	return results;
 }
 
@@ -399,6 +402,7 @@ async function initGame(){
 
 	try {
 		const deck = await buildDeckForTheme(currentTheme, GAME_CONFIG.defaultPairs);
+		// Builds the deck for the current theme with the default pair count
 		gameState.deck = deck;
 		renderDeck(gameState.deck);
 		setGameStatus("ready");
@@ -604,11 +608,13 @@ function highlightThemeSelection(themeKey) {
 	});
 }
 
+// Picks the matching theme builder (defaulting to the dogs theme if the key isn’t found) and invokes it, returning the deck (or a promise of it)
 async function buildDeckForTheme(themeKey, pairCount) {
 	const builder = THEME_BUILDERS[themeKey] || THEME_BUILDERS[THEMES.DOGS];
 	return builder(pairCount);
 }
 
+// Sets the current theme, updates the win sound, highlights the selected theme button, and resets the game
 function setTheme(themeKey) {
 	if (!Object.values(THEMES).includes(themeKey)) return;
 	currentTheme = themeKey;
